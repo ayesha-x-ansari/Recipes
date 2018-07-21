@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# I addedthis below as signout was not working got it from https://stackoverflow.com/questions/6557311/no-route-matches-users-sign-out-devise-rails-3  Ayesha
+#Sconfig.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery_ujs)
+
+
 module RecipeApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
