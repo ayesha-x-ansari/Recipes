@@ -6,16 +6,37 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.build
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.save
+    @recipe = current_user.recipes.build(recipe_params)
+    if @recipe.save
+      redirect_to @recipe, notice: "Successfully created new recipe"
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @recipe.update(recipe_parems)
+      redirect_to @recipe
+    else
+      render 'edit'
+    end
   end
 
   def show
   end
+
+  def destroy
+    @recipe.destroy
+    redirect_to root_path, notice: "Sucessfully deleted recipe."
+  end
+
 
   private
 
