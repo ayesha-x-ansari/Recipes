@@ -8,8 +8,8 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = 'a979de1a5dae27684c5623f6c5296393fa7a1adf9c49f3d788ee8dbadbd66f972672fc0a8a21e4da11750046f4a2dc7459760eb1f9b07d23c3f3f34c7777a0d4'
-
+  config.secret_key = 'f4f06f07f7a8017f5e2ccd015e58f86d7344b4bcc210f460c4d1753f04eede75f232c8b5d4a621fdc2308ddee13b20cd7266f9888bd6a4aa5e451e0b235cb3ea
+  '
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -283,5 +283,8 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   #config.sign_out_via = :delete
+
+  config.omniauth :facebook, "682678982070578",  "7a1cfc23fc0fba2acc662cf1b0e328b5"
+
 
 end
