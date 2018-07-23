@@ -6,7 +6,7 @@
        <%if comment.recipe_id  == @recipe.id  %>
      Comment: <%=  comment.content%>
         <%if comment.user_id == @current_user.id%>
-         <%= link_to  "Edit Comment", new_recipe_comment_path(@recipe.id)  %>   <%= link_to  "Delete Comment", recipe_comment_path(@recipe), :method => :delete  %>
+         <%= link_to  "Edit Comment", new_recipe_comment_path(@recipe.id)  %>   <%= link_to  "Delete Comment", recipe_comment_path(comment.id), :method => :delete  %>
          <% else%>
           <%= comment.user_id  %>  <%=@current_user.id%>
         <%end%>
