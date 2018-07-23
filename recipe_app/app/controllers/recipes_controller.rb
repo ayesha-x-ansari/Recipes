@@ -30,6 +30,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def show
+    @current_user = current_user
   end
 
   def destroy
