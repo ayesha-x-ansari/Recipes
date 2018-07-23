@@ -21,9 +21,9 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-    if @comment.user_id != current_user.id
-      redirect_to user_recipes_path(current_user), alert: "You may not delete this comment!"
-    end
+    #if @comment.user_id != current_user.id
+    #  redirect_to user_recipes_path(current_user), alert: "You may not delete this comment!"
+    #end
   end
 
   def update
@@ -53,4 +53,4 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:content, :user_id, :recipe_id)
     end
-end      
+end
