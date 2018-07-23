@@ -1,7 +1,16 @@
 <pre>
-<h3><%= @recipe.title %> </h3>
-    <%= @recipe.description %>
+<h3> <%= @recipe.title %> </h3>
+     Direction: <%= @recipe.description %>
+     <% @comments = Comment.all %>
+     <% @comments.each do |comment|  %>
+       <%if comment.recipe_id  == @recipe.id  %>
+     Comment: <%=  comment.content%>
+        <%if comment.user_id == current_user%>
+         <%= link_to  "Edit Comment", new_recipe_comment_path(@recipe.id)  %>
+        <%end%>
+      <%end%>
+    <%end%>
 
-<%= link_to  "Edit", edit_recipe_path(@recipe)  %>    <%= link_to  "Delete", recipe_path(@recipe), :method => :delete  %>
-<%= link_to  "Comment", comment_path  %>
+
+<%= link_to  "Edit", edit_recipe_path(@recipe)  %>  <%= link_to  "Delete", recipe_path(@recipe), :method => :delete  %>  <%= link_to  "Comment", new_recipe_comment_path(@recipe.id)  %>
 </pre>
