@@ -8,7 +8,8 @@
         <%if comment.user_id == @current_user.id%>
         <% recipe_id = @recipe.id %>
         <% id = comment.id %>
-         <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id)  %>   <%= link_to  "Delete Comment", recipe_comment_path(recipe_id, id), :method => :delete  %>
+         <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id)  %>
+         <%= link_to  "Delete Comment", recipe_comment_path(recipe_id, id), :method => :delete, data: {confirm: "Are you sure?" }  %>
          <% else%>
           <%= comment.user_id  %>  <%=@current_user.id%>
         <%end%>
@@ -16,5 +17,7 @@
     <%end%>
 
 
-<%= link_to  "Edit", edit_recipe_path(@recipe)  %>  <%= link_to  "Delete", recipe_path(@recipe), :method => :delete  %>  <%= link_to  "Comment", new_recipe_comment_path(@recipe.id)  %>
+<%= link_to  "Edit", edit_recipe_path(@recipe)  %>  <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }  %>
+ <%= link_to  "Comment", new_recipe_comment_path(@recipe.id)  %>
 </pre>
+  

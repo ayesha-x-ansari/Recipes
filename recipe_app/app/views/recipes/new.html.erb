@@ -14,10 +14,25 @@
 <% end %>
 
 <pre>
-<%= form_for @recipe do |f| %>
+<%= form_for  @recipe, html: { multipart: true } do |f| %>
+
   Title:        <%= f.text_field :title %>  <br>
 
   Description: <%= f.text_area :description %> <br>
+
+
+  <h3> Ingredients: </h3>
+      <%= f.fields_for :ingredients do |ingredient|  %>
+
+      <h1> ddddddddd</h1>
+
+        <%= render   'ingredients_fields', f: ingredient %>
+        <%#= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-default" %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-default" %>
+      </div>
+
                <%= f.submit %>
 <% end %>
 <pre>

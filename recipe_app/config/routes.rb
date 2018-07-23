@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   root 'recipes#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  resources :ingredients, only: [:create, :destroy]
+
 
 end
-  

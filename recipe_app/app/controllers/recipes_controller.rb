@@ -42,7 +42,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description)
+    params.require(:recipe).permit(:title, :description, :ingrdients_attributes [:id, :name, :_destroy])
   end
 
   def find_recipe
