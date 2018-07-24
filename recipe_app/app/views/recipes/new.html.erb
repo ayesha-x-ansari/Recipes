@@ -29,8 +29,9 @@
         <%= render   'ingredients_fields', f: ingredient %>
         <%#= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-default" %>
       <% end %>
+
       <div class="links">
-        <%= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-default" %>
+        <%= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-success" %>
       </div>
 
                <%= f.submit %>
