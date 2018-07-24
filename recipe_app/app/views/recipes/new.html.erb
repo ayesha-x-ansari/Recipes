@@ -1,6 +1,22 @@
-<h2> Create A New Recipe </h2>
-  <%= render 'form' %>
+<% if @recipe.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@recipe.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
 
+    <ul>
+    <% @recipe.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_for  @recipe, html: { multipart: true } do |f| %>
+  Title      : <%= f.text_field :title %> <br>
+  Description: <%= f.text_area :description %>
 
   <h3> Add Ingredients: </h3>
       <%= f.fields_for :ingredients do |ingredient|  %>
@@ -8,8 +24,8 @@
       <% end %>
 
       <div class="links">
-        <%= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-success" %>
+        <%= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-link" %>
       </div>
       <br>
        <%= f.submit %>
-<%end%>
+  <% end %>
