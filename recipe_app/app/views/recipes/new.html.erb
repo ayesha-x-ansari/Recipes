@@ -1,9 +1,9 @@
 <% if @recipe.errors.any? %>
   <div id="error_explanation">
-    <h2>
+    <h4>
       <%= pluralize(@recipe.errors.count, "error") %>
       prohibited this post from being saved:
-    </h2>
+    </h4>
 
     <ul>
     <% @recipe.errors.full_messages.each do |msg| %>
@@ -20,7 +20,7 @@
 
   <h3> Add Ingredients: </h3>
       <%= f.fields_for :ingredients do |ingredient|  %>
-        <%= render   'ingredients_fields', f: ingredient %>
+        <%= render   'ingredient_fields', f: ingredient %>
       <% end %>
 
       <div class="links">
