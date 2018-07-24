@@ -1,6 +1,10 @@
 <pre>
 <h4> <%= @recipe.title %> </h4>
      Direction: <%= @recipe.description %>
+    <% @recipe.ingredients.each do |ingredient| %>
+    <h1> dddddddd</h2>
+       <%= ingredient.name %>
+     <%end%>
 
      <% @comments = Comment.all %>
      <% @comments.each do |comment|  %>
