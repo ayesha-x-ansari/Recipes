@@ -28,6 +28,17 @@
         <%= link_to_add_association 'Add ingredients', f, :ingredients, class: "btn btn-link" %>
       </div>
       <br>
+
+      <h3> Add Steps: </h3>
+      <%= f.fields_for :steps do |step|  %>
+          <%= render   'step_fields', f: step %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'Add steps', f, :steps, class: "btn btn-link" %>
+      </div>
+      <br>
+
        <%= f.submit %>
     <% end %>
   </div>
