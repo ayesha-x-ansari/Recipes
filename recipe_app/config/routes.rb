@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :recipes  do
     resources :comments
   end
-  root 'recipes#index'
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :ingredients, only: [:create, :destroy]
 
+  root 'recipes#index'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
 end

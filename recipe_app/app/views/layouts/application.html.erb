@@ -17,14 +17,17 @@
         </div>
         <ul class="nav navbar-nav">
             <%if user_signed_in? %>
-              <li class="active"><li>  <%= link_to "Home", root_path %> </li>
-              <li>   <%= link_to "Sign Out", destroy_user_session_path, :method =>:delete %> </li>
-              <li>    <%= link_to "+Add a Recipe", new_recipe_path %></li><
+                <li class="active"><li>  <%= link_to "Home", root_path %> </li>
+                <li>   <%= link_to "Sign Out", destroy_user_session_path, :method =>:delete %> </li>
+                <li>    <%= link_to "+Add a Recipe", new_recipe_path %></li>
             <%end%>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <%if user_signed_in? %>
+          <%else%>
+            <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <%end%>
         </ul>
       </div>
     </nav>
