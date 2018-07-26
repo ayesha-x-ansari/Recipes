@@ -43,22 +43,6 @@ body {
   font-weight: bold;
 }
 
-.navbar {
-  margin-bottom: 50px;
-  @include box-shadow;
-  border: none;
-  .navbar-brand {
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    font-weight: bold;
-    font-size: 25px;
-    a {
-      color: $red;
-    }
-  }
-
-}
-
 .recipe {
   background: white;
   border-radius: 5px;
