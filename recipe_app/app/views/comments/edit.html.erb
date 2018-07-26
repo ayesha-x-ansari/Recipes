@@ -2,12 +2,12 @@
 <div class="row">
   <div class="col=md-6 col-md-offset-3">
 
-    <h3> Edit Recipe </h3>
+    <h4> Edit Recipe </h4>
 
-    <h3> Add a comment for <%= @recipe.title %> recipe</h3>
+    <h5> Add a comment for <%= @recipe.title %> recipe</h5>
     <%= form_for @comment, url: recipe_comment_path(@recipe.id, @comment.id)   do |f| %>
 
-      Content: <%= f.text_area :content %>
+      <%= f.text_area :content %>
       <%= f.hidden_field :recipe_id, value: @recipe.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <br><br>
