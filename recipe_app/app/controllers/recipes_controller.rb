@@ -6,6 +6,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def new
+    flash[:alert] = 'Add your yummy recipe for everyone to enjoy'
     @recipe = current_user.recipes.build
   end
 
@@ -19,6 +20,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
+    flash[:alert] = 'Edit your recipe!'
   end
 
   def update

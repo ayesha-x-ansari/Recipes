@@ -16,10 +16,17 @@
 <div class="row">
   <div class="col=md-6 col-md-offset-3">
     <%= form_for  @recipe, html: { multipart: true } do |f| %>
-      Title      : <%= f.text_field :title %> <br>
-      Description: <%= f.text_field :description %>
+      <div>
+        <%= f.label :title %> <br>
+        <%= f.text_field :title %>
+      </div>
 
-      <h3> Add Ingredients: </h3>
+      <div>
+        <%= f.label :description %> <br>
+        <%= f.text_field :description %>
+      </div>
+      <br>
+      <%= f.label :ingredient %> <br>
       <%= f.fields_for :ingredients do |ingredient|  %>
           <%= render   'ingredient_fields', f: ingredient %>
       <% end %>
@@ -29,7 +36,7 @@
       </div>
       <br>
 
-      <h3> Add Steps: </h3>
+      <%= f.label :steps %> <br>
       <%= f.fields_for :steps do |step|  %>
           <%= render   'step_fields', f: step %>
       <% end %>
@@ -39,7 +46,7 @@
       </div>
       <br>
 
-       <%= f.submit%>
+       <%= f.submit 'Button Name', :class => 'btn btn-primary' %>
     <% end %>
   </div>
 <div>

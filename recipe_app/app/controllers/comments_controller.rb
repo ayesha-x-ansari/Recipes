@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_recipe
 
   def new
+    flash[:alert]  = "Add your favourite yummy recipe!"
     @comment = Comment.new
   end
 
@@ -20,6 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    flash[:alert]  = "Edit your favourite yummy recipe!"
     @comment = Comment.find(params[:id])
     #if @comment.user_id != current_user.id
     #  redirect_to user_recipes_path(current_user), alert: "You may not delete this comment!"
