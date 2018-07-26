@@ -1,7 +1,7 @@
 <% title @recipe.title %>
 <div class="row">
   <div class="col=md-8 col-md-offset-1">
-    <h3> <%= @recipe.title %> </h3>
+    <h4> <%= @recipe.title %> - <%= last_updated @recipe %> </h4>
     <p> Description: <%= @recipe.description %>  <p>
 
     Ingredients:
