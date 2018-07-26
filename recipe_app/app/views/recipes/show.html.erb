@@ -1,5 +1,6 @@
-<div>
-<h3> <%= @recipe.title %> </h3>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+    <h3> <%= @recipe.title %> </h3>
     Ingredients:
     <ul>
       <% @recipe.ingredients.each do |ingredient| %>
@@ -12,11 +13,12 @@
     <% @comments = Comment.all %>
     <% @comments.each do |comment|  %>
       <%if comment.recipe_id  == @recipe.id  %>
-    Comment: <%=  comment.content%>
+        Comment: <%=  comment.content%> <br>
        <%if comment.user_id == @current_user.id%>
        <% recipe_id = @recipe.id %>
        <% id = comment.id %>
            <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>  <%= link_to  "Delete Comment", recipe_comment_path(recipe_id, id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
+           <br>
         <% else%>
          <%= comment.user_id  %>  <%=@current_user.id%>
        <%end%>
@@ -24,5 +26,9 @@
    <%end%>
 
 <br>
-<%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-default"  %>  <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"  %>  <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-default"  %>
+<%if @recipe.user_id == @current_user.id%>
+  <%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-default"  %>  <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"  %>  <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-default"  %>
+<%else%>
+  <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-primary"  %>
 </pre>
+<%end%>

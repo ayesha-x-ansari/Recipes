@@ -1,6 +1,8 @@
-<h2> List of Recipe </h2>
-<ul>
-<%@recipe.each do |recipe|%>
-<li>  <%= link_to recipe.title, recipe_path(recipe) %> </li>
-<%end%>
-</ul>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+    <h2> List of Recipe </h2>
+    <ul>
+      <%@recipe.each do |recipe|%>
+        <li> <%= link_to recipe.title, recipe_path(recipe) %> </li>
+      <%end%>
+    </ul>

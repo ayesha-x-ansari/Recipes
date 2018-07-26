@@ -1,4 +1,10 @@
-Content: <%= f.text_area :content %>
-<%= f.hidden_field :recipe_id, value: @recipe.id %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<p><%= f.submit %></p>
+<div class="row">
+  <div class="col=md-6 col-md-offset-3">
+    Content: <%= f.text_area :content %>
+    <%= f.hidden_field :recipe_id, value: @recipe.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <br><br>
+  <p><%= f.submit %></p>
+<%end%>
+</div>
+</div>
