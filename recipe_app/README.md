@@ -1,5 +1,3 @@
-# Build a Rails App
-
 ## Rails Portfolio Project
 
 Rails Portfolio Project is a Recipe App is a Rails Application where users can create, manage and browse recipes and can also 
