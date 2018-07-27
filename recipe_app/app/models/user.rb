@@ -4,6 +4,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :recipes
+  ####            has_many :comments
+  has_many :comments, through: :recipes
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -14,6 +18,4 @@ class User < ApplicationRecord
     end
   end
 
-
-  has_many :recipes
 end

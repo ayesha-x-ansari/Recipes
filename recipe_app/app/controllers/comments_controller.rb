@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
 
     if @comment.valid?
-      @recipe.comments << @comment
+    #  @recipe.comments << @comment
       @recipe.save
       @comment.save
       redirect_to @recipe, alert: "Comment successfully added."

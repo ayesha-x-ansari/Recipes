@@ -36,6 +36,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def destroy
+    raise params.inspect
     @recipe.destroy
     redirect_to root_path, notice: "Sucessfully deleted recipe."
   end

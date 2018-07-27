@@ -9,7 +9,6 @@ class Recipe < ApplicationRecord
   validates_associated :steps
 
   belongs_to :user
-  has_many :comments
   has_many :ingredients
   has_many :steps
 
