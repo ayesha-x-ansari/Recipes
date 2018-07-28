@@ -9,9 +9,23 @@
     <%= form_for @comment, url: recipe_comments_path   do |f| %>
       <div>
         <%= f.text_area :content, rows: 6, cols:50%>
+        <%= f.label :ratings %><br>
+        <%#= f.select :ratings, [["1", :ratings  => "1"], ["2", "2"]], :required => true,  :prompt => 'Select One'    %>
+
+          <%#= f.select :ratings, options_for_select(["Select One", ["1", "1"], "2", "3", "4", "5"],:enabled => ["Select One"]), :class => 'genForm_dropBox' %>
+          <%= f.select(:ratings, [['1', '1'],
+                                  ['2', '2'],
+                                  ['3', '3'],
+                                  ['3', '3'],
+                                  ['5', '5']
+                                 ],{ :prompt => "Please select"}
+                                 ) %>
+
+
+        <%#= f.select  ("1", "2") :prompt => 'Select One'    %>
       </div>
       <div>
-        <%= f.select :ratings, options_for_select([["1"], ["2"], ["3"], ["4"], ["5"]]) :ratings %>
+
       </div>
       <%= f.hidden_field :recipe_id, value: @recipe.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
