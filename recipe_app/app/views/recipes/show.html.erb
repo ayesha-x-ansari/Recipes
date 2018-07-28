@@ -1,11 +1,14 @@
 
   <% title @recipe.title %>
+
   <div class="row">
   <div class="column" style="background-color:#f9f9f9;">
-    <h4> <%= last_updated @recipe %> </h4>
-    <h5> <%= "Title: "  +  @recipe.title  %></h5>
-    <p> Description: <p>
-    <p><%= @recipe.description %>  <p>
+    <%= last_updated @recipe %> <br>
+    <%= "Title:  "  +  @recipe.title  %> <br>
+      Description:
+       <%= @recipe.description %>
+       <br>
+       <br>
       <%if @recipe.user_id == @current_user.id%>
         <%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-primary"  %>  <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-primary"  %>  <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-primary"  %>
       <%else%>
@@ -25,7 +28,7 @@
   </div>
 
   <div class="column" style="background-color:#f2f2f2;">
-    Steps:
+     Steps:
     <ol>
       <% @recipe.steps.each do |s| %>
       <li> <%= s.step %> </li>
@@ -41,7 +44,8 @@
       <% @comments = Comment.all %>
     <% @comments.each do |comment|  %>
       <%if comment.recipe_id  == @recipe.id  %>
-        Comment By:<%= @recipe.user.name %>  - <%=  comment.content%> <br>
+          Comment By:
+          <%= @recipe.user.name %>  - <%=  comment.content%> <br>
        <%if comment.user_id == @current_user.id%>
        <% recipe_id = @recipe.id %>
        <% id = comment.id %>
