@@ -1,7 +1,7 @@
 <body>
-  <h1>Recipe Form</h1>
+  <h4>Recipe Form</h4>
 
-  %= render partial: 'layouts/errors', locals:{obj: @recipe}%>
+  <%= render partial: 'layouts/errors', locals:{obj: @recipe}%>
 
 <%= form_for  @recipe, html: { multipart: true } do |f| %>
 <div class="row">
