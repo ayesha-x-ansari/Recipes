@@ -6,6 +6,10 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
+  def new
+    @comment = Comment.new
+  end
+
   def create
     @comment = Comment.new(comment_params)
 

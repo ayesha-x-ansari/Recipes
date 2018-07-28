@@ -1,0 +1,9 @@
+<h5> Top 5 Comments </h5>
+<%  Comment.top_five_comments.each do |comment| %>
+  <p><%= comment.recipe.user.name %>
+    <%= comment.content %>
+    <%= comment.ratings %>
+    <%= comment.recipe.title %>
+    <%= comment.recipe.user.name%> <p>
+    <%# comment.user.name %> <p>
+<% end %>

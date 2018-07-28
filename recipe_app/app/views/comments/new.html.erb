@@ -10,6 +10,9 @@
       <div>
         <%= f.text_area :content, rows: 6, cols:50%>
       </div>
+      <div>
+        <%= f.select :ratings, options_for_select([["1"], ["2"], ["3"], ["4"], ["5"]]) :ratings %>
+      </div>
       <%= f.hidden_field :recipe_id, value: @recipe.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <br>
