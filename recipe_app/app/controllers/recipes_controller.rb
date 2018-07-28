@@ -20,7 +20,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
-    flash[:alert] = 'Edit your recipe!'
+    flash[:alert] = "Edit your recipe! #{current_user.name}!"
   end
 
   def update
