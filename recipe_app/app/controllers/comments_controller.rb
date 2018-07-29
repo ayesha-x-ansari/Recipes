@@ -2,8 +2,8 @@ class CommentsController < ApplicationController
 
   before_action :set_recipe
 
-  def new
-    @comment = Comment.new
+  def index
+    @comments = Comment.top_five_comments(params[:recipe_id])
   end
 
   def new
