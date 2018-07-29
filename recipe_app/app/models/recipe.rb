@@ -10,7 +10,6 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
   has_many :comments
-  has many :users through :comments
   has_many :ingredients
   has_many :steps
 

@@ -3,8 +3,7 @@
 
   <div class="row">
   <div class="column" style="background-color:#f9f9f9;">
-    <%= last_updated @recipe %> <br>
-    <%= "Title:  "  +  @recipe.title  %> <br>
+    <h4> Hi <%=current_user.name%> you are viewing " <%= @recipe.title  %> " recipe, which was <%= last_updated @recipe %> <br> </h4>
       Description:
        <%= @recipe.description %>
        <br>
@@ -45,15 +44,15 @@
     <% @comments.each do |comment|  %>
       <%if comment.recipe_id  == @recipe.id  %>
           Comment By:
-          <%= @recipe.user.name %>  - <%=  comment.content%> <br>
+          <%= comment.user.name %>  - <%=  comment.content%> <br>
        <%if comment.user_id == @current_user.id%>
-       <% recipe_id = @recipe.id %>
-       <% id = comment.id %>
-           <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>  <%= link_to  "Delete Comment", recipe_comment_path(recipe_id, id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
+       <%# recipe_id = @recipe.id %>
+       <% #id = comment.id %>
+           <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
+           <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
            <br>
-        <% else%>
-         <%= comment.user_id  %>  <%=@current_user.id%>
-       <%end%>
+
+          <%end%>
      <%end%>
    <%end%>
 

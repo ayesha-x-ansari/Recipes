@@ -4,9 +4,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
   has_many :recipes
   has_many :comments
-  has_many :recipes, through: :comments
+  has_many :users, through: :comments
 
 
   def self.from_omniauth(auth)
