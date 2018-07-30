@@ -3,7 +3,7 @@
   <div class="col=md-8 col-md-offset-1">
     <h4> Top 5 Comments for recipe </h4>
     <%#  Comment.top_five_comments.each do |comment| %>
-    <%  @comments.sort(:ratings).each do |comment| %>
+    <%  @comments.each do |comment| %>
       <p>
         <%= comment.recipe.title %>'s comment BY <%= comment.user.name %><br>
         <%= comment.content %>

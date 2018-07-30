@@ -1,25 +1,22 @@
-<%= render partial: 'layouts/errors', locals:{obj: @comment}%>
+<%= render 'layout/message'%>
 <% title @recipe.title %>
 <div class="row"  >
   <div class="col=md-6 col-md-offset-3">
     <br>
     <br>
-    <h4> Add comment <%= current_user.name %>  </h4>
+    <h4> Add comment <%= @recipe.user.id %>  </h4>
 
     <%= form_for @comment, url: recipe_comments_path   do |f| %>
       <div>
-        <%= f.label :content %><br>
-        <%= f.text_area :content, rows: 6, cols:50%><br>
+        <%= f.text_area :content, rows: 6, cols:50%>
         <%= f.label :ratings %><br>
         <%= f.select(:ratings, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']],{ :prompt => "Please select"}) %>
       </div>
 
       <%= f.hidden_field :recipe_id, value: @recipe.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
-
-      <div class="col=md-7 col-md-offset-2">
-        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary' %></p>
-      </div>
+      <br> <br> <br>
+      <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary' %></p>
     <%end%>
   </div>
 </div>
