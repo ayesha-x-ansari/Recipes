@@ -1,19 +1,19 @@
 class RecipesController < ApplicationController
 before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
 
-  def index
+    def index
     @recipe = Recipe.all
   end
 
   def new
-    flash[:alert] = 'Add your yummy recipe for everyone to enjoy'
+    flash[:alert] = "#{current_user.name} add a yummy recipe for everyone to enjoy"
     @recipe = current_user.recipes.build
   end
 
   def create
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
-      redirect_to @recipe, notice: "Successfully created new recipe"
+      redirect_to @recipe, alert: " #{current_user.name} you successfully created a new recipe"
     else
       render 'new'
     end
@@ -36,7 +36,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def destroy
-    raise params.inspect
+  #  raise params.inspect
     @recipe.destroy
     redirect_to root_path, notice: "Sucessfully deleted recipe."
   end

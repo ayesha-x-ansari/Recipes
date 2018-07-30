@@ -7,6 +7,6 @@ class Comment < ApplicationRecord
 
   #scope :top_five_comments, -> {order("comments.ratings DESC").limit(5)}
   #scope :top_five_comments, -> {order("comments.ratings DESC").limit(5)}
-  scope :top_five_comments, ->(recipe_id) { where(recipe_id: recipe_id )}
+  scope :top_five_comments, ->(recipe_id) { where(recipe_id: recipe_id)}
 
 end

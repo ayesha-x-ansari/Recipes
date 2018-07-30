@@ -5,9 +5,8 @@
     <%#  Comment.top_five_comments.each do |comment| %>
     <%  @comments.each do |comment| %>
       <p>
-        <%= comment.recipe.title %>'s comment BY <%= comment.user.name %><br>
-        <%= comment.content %>
-        <emp> giving <%= comment.ratings %> stars <emp>
+        <%= comment.ratings %> stars, title: <%= comment.recipe.title %>, description:<%= comment.content %>
+
       <p>
     <% end %>
   </div>
