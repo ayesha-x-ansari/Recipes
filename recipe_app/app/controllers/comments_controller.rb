@@ -41,6 +41,11 @@ class CommentsController < ApplicationController
       end
   end
 
+  def show
+  #@comments_rating5 = Comment.comments_rating5(params[:recipe_id])
+
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
