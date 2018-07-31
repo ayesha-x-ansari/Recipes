@@ -11,6 +11,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def create
+    raise params.inspect
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       redirect_to @recipe, alert: " #{current_user.name} you successfully created a new recipe"
