@@ -9,10 +9,10 @@ class Recipe < ApplicationRecord
   validates_associated :steps
 
   belongs_to :user
-  has_many :comments
-  has_many :ingredients
-  has_many :steps
-
+  has_many :comments,  :dependent => :delete_all
+  has_many :ingredients, :dependent => :delete_all
+  has_many :steps, :dependent => :delete_all
+  has_many :users, through: :comments
 
   accepts_nested_attributes_for :ingredients,
                  reject_if: proc { |attributes| attributes['name'].blank?},
