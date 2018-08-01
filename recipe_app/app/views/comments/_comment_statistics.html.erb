@@ -1,0 +1,26 @@
+<% title "Recipe Comment Stats" %>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+    <h3>  Comment for the select Recipe  with rating 1</h3>
+    <table class = "table">
+      <tbody>
+        <tr>
+          <td> Comment By </td>
+          <td> Recipe Name </td>
+          <td> Content </td>
+          <td> Rating </td>
+        </tr>
+
+        <% obj.each do |comment| %>
+          <tr>
+            <td> <%= comment.user.name %> </td>
+            <td> <%= comment.recipe.title %> </td>
+            <td> <%= comment.content %> </td>
+            <td> <%= comment.ratings %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+  <br><br>
+</div>
+</div>

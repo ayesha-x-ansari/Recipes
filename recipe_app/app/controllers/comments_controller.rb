@@ -42,13 +42,11 @@ class CommentsController < ApplicationController
   end
 
   def comment_statistics
-    @comment_rating1 = Comment.comment_rating1(params[:recipe_id])
-          
-
-  #  @comment_rating2 = Comment.comment_rating2(params[:recipe_id])
-  #  @comment_rating3 = Comment.comment_rating3(params[:recipe_id])
-  #  @comment_rating4 = Comment.comment_rating4(params[:recipe_id])
-  #  @comment_rating5 = Comment.comment_rating1(params[:recipe_id])
+    @comment_rating1 = Comment.comment_rating1(params[:recipe_id], ratings: 1)
+    @comment_rating2 = Comment.comment_rating2(params[:recipe_id], ratings: 2)
+    @comment_rating3 = Comment.comment_rating3(params[:recipe_id], ratings: 3)
+    @comment_rating4 = Comment.comment_rating4(params[:recipe_id], ratings: 4)
+    @comment_rating5 = Comment.comment_rating5(params[:recipe_id], ratings: 5)
   end
 
 
