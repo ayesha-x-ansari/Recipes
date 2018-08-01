@@ -23,6 +23,12 @@
                 <li>    <%= link_to "+Add a Recipe", new_recipe_path %></li>
             <%end%>
         </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <%= form_tag(recipes_path, :method => 'get', id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search by ingredient", class: "form-control mr-sm-2" %>
+          <%= submit_tag "Search", :name => nil, class: "btn btn-secondary my-2 my-sm-0" %>
+        <% end %>
+
         <ul class="nav navbar-nav navbar-right">
           <%if user_signed_in? %>
           <%else%>

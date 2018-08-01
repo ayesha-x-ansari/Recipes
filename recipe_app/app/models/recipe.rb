@@ -10,9 +10,11 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
   has_many :comments,  :dependent => :delete_all
-  has_many :ingredients, :dependent => :delete_all
   has_many :steps, :dependent => :delete_all
   has_many :users, through: :comments
+
+  has_many :recipe_ingredients, :dependent => :delete_all
+  has_many :ingredients, through: :recipe_ingredients, :dependent => :delete_all
 
   accepts_nested_attributes_for :ingredients,
                  reject_if: proc { |attributes| attributes['name'].blank?},
@@ -21,5 +23,9 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :steps,
                  reject_if: proc { |attributes| attributes['step'].blank?},
                   allow_destroy: true
+
+  def self.search(search)
+      joins(:ingredients).where({ingredients: { name: "#{search}" }})
+  end
 
 end
