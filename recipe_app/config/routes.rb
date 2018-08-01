@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  #devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :recipes  do
-    resources :comments
-  end
 
   root 'recipes#index'
 
+  get '/comments/comment_statistics/:recipe_id' => 'comments#comment_statistics'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  resources :recipes  do
+    resources :comments, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+  end
+
+  resources :users
+  resources :comments
+  resources :recipes
 
 end

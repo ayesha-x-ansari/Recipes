@@ -41,9 +41,19 @@ class CommentsController < ApplicationController
       end
   end
 
-  def show
-  #@comments_rating5 = Comment.comments_rating5(params[:recipe_id])
+  def comment_statistics
+    @comment_rating1 = Comment.comment_rating1(params[:recipe_id])
+          
 
+  #  @comment_rating2 = Comment.comment_rating2(params[:recipe_id])
+  #  @comment_rating3 = Comment.comment_rating3(params[:recipe_id])
+  #  @comment_rating4 = Comment.comment_rating4(params[:recipe_id])
+  #  @comment_rating5 = Comment.comment_rating1(params[:recipe_id])
+  end
+
+
+  def show
+   @comments_rating5 = Comment.comments_rating5(params[:recipe_id])
   end
 
   def destroy
