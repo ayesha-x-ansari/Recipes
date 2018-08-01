@@ -1,0 +1,11 @@
+<%obj0.load%>
+<%count = obj0.size%>
+<% if count == 0 %>
+  <div class="row">
+    <div class="col=md-8 col-md-offset-1">
+      <h4><%= "No record for selected recipe for rating #{rnum0}" %></h4>
+    </div>
+  </div>
+<% else%>
+  <%= render partial: 'comment_statistics', locals:{obj: obj0, rnum: rnum0}%>
+<%end%>
