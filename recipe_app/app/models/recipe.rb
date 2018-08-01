@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
+  validates :title, uniqueness: true
 
   validates :ingredients, presence: true
   validates :steps, presence: true

@@ -1,0 +1,11 @@
+<% title "list of Ingredients" %>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+    <h4> List of Ingredients </h4>
+    <ul>
+      <%@ingredients.each do |ingredient|%>
+        <li> <%= link_to ingredient.name, ingredients_path  %> </li>
+      <%end%>
+    </ul>
+  </div>
+</div>

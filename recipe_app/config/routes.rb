@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   root 'recipes#index'
 
-  get 'comments/comment_statistics/:id' => 'comments#comment_statistics'
+  resources :ingredients, only: [:index, :show]
+
+  get 'comments/comment_statistics/:recipe_id' => 'comments#comment_statistics'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
