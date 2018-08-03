@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'recipes#index'
+  root 'wellcomes#index'
 
   resources :ingredients, only: [:index, :show]
+
+  resources :wellcomes, only: [:index]
 
   get 'comments/comment_statistics/:recipe_id' => 'comments#comment_statistics'
 

@@ -1,8 +1,7 @@
 <% title "list of recipe" %>
 <div class="row">
   <div class="col=md-8 col-md-offset-1">
-    <h3> Wellcome <%=current_user.name %> </h3>
-    <h4> List of your recipes</h4>
+    <h4> List of Recipe </h4>
     <ul>
       <%@recipes.each do |recipe|%>
         <li> <%= link_to recipe.title, recipe_path(recipe) %>  - <%= last_updated recipe %> </li>

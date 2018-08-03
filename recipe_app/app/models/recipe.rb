@@ -29,4 +29,7 @@ class Recipe < ApplicationRecord
       joins(:ingredients).where({ingredients: { name: "#{search}" }})
   end
 
+  # Find recipe by user
+  scope :recipes_by_current_user, -> (user_id){ where(user_id: user_id) }
+
 end

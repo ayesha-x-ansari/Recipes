@@ -5,7 +5,11 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
       if params[:search]
         @recipes  = Recipe.search(params[:search])
       else
-        @recipes  = Recipe.all
+      #  raise current_user.id.inspect      (params[:recipe_id])
+        user_id = current_user.id
+        @recipes  = Recipe.recipes_by_current_user(user_id: current_user.id)
+
+
       end
   end
 

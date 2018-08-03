@@ -14,11 +14,11 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Myrecipes</a>
+          <a class="navbar-brand" href="/">AllRecipes</a>
         </div>
         <ul class="nav navbar-nav">
             <%if user_signed_in? %>
-                <li class="active"><li>  <%= link_to "Home", root_path %> </li>
+                <li class="active"><li>  <%= link_to "Home", recipes_path %> </li>
                 <li>   <%= link_to "Sign Out", destroy_user_session_path, :method =>:delete %> </li>
                 <li>   <%= link_to "List of Ingredients", ingredients_path %></li>
                 <li>   <%= link_to "+Add a Recipe", new_recipe_path %></li>
