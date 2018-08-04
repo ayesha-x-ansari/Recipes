@@ -12,7 +12,7 @@
       <%if @recipe.user_id == @current_user.id%>
         <%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-primary"  %>
         <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-primary"  %>
-        <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-primary"  %>
+        <%#= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-primary"  %>
         <%= link_to  "Top 5 Comments", recipe_comments_path(@recipe.id), class: "btn btn-primary"  %>
 
       <%else%>

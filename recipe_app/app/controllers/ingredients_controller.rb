@@ -5,5 +5,6 @@ class IngredientsController < ApplicationController
   end
 
   def show
+
   end
 end

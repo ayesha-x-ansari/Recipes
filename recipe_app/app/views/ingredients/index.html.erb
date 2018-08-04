@@ -4,7 +4,7 @@
     <h4> List of Ingredients </h4>
     <ul>
       <%@ingredients.each do |ingredient|%>
-        <li> <%= link_to ingredient.name, ingredients_path  %> </li>
+        <li> <%= link_to ingredient.name, ingredient_path(ingredient.id)  %> </li>
       <%end%>
     </ul>
   </div>
