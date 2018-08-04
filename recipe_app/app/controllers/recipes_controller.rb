@@ -6,9 +6,8 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
         @recipes  = Recipe.search(params[:search])
       else
       #  raise current_user.id.inspect      (params[:recipe_id])
-        user_id = current_user.id
-        @recipes  = Recipe.recipes_by_current_user(user_id: current_user.id)
-
+        params[:user_id] = current_user.id
+        @recipes  = Recipe.recipes_by_current_user(params[:user_id])
 
       end
   end
