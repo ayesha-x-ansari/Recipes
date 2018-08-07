@@ -32,4 +32,11 @@ class Recipe < ApplicationRecord
   # Find recipe by user
   scope :recipes_by_current_user, -> (user_id){ where(user_id: user_id) }
 
+  def ingredients_attributes=(ingredient_attributes)
+    ingredient_attributes.values.each do |ingredient_attribute|
+      ingredient = Ingredient.find_or_create_by(ingredient_attribute)
+      self.ingredients << ingredient
+    end
+  end
 end
+  

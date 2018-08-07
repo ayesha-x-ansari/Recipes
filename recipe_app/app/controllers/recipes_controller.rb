@@ -15,6 +15,7 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   def new
     #flash[:alert] = "#{current_user.name} add a yummy recipe for everyone to enjoy"
     @recipe = current_user.recipes.build
+
   end
 
   def create
@@ -55,7 +56,8 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description, :user_id, ingredients_attributes: [ :id, :name, :_destroy], steps_attributes: [ :id, :step, :_destroy])
+  #  params.require(:recipe).permit(:title, :description, :user_id, ingredient_ids:[], ingredients_attributes: [ :id, :name, :_destroy], steps_attributes: [ :id, :step, :_destroy])
+    params.require(:recipe).permit(:title, :description, :user_id, ingredient_ids:[], ingredients_attributes: [ :name], steps_attributes: [ :id, :step, :_destroy])
   end
 
   def find_recipe
@@ -63,3 +65,4 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
 end
+  
