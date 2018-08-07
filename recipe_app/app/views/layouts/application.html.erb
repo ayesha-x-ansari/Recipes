@@ -22,6 +22,8 @@
                 <li>   <%= link_to "Sign Out", destroy_user_session_path, :method =>:delete %> </li>
                 <li>   <%= link_to "List of Ingredients", ingredients_path %></li>
                 <li>   <%= link_to "+Add a Recipe", new_recipe_path %></li>
+                <li>   <%= link_to "Your Comments", user_path(current_user.id) %></li>
+
             <%end%>
         </ul>
         <div class="form-inline my-2 my-lg-0">

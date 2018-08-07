@@ -1,0 +1,11 @@
+<center><h1><%= @user.name  + "'s"%> comments:</h1></center>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+
+    <% @user.comments.each do |comment|%>
+      <p>
+        <%= link_to comment.recipe.title , recipe_path(comment.recipe_id) %> - <%= comment.content %>
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<center><h1><%= @ingredient.name  + "'s"%> is present in following recipes:</h1></center>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+
+    <% @ingredient.recipes.each do |recipe|%>
+      <p>
+        <%= link_to recipe.title , recipe_path(recipe.id) %>
+      </p>
+    <% end %>
+  </div>
+</div>
