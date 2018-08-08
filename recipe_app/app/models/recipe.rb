@@ -11,8 +11,8 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
   has_many :comments,  :dependent => :delete_all
-  has_many :steps, :dependent => :delete_all
   has_many :users, through: :comments
+  has_many :steps, :dependent => :delete_all
 
   has_many :recipe_ingredients, :dependent => :delete_all
   has_many :ingredients, through: :recipe_ingredients, :dependent => :delete_all
@@ -24,7 +24,7 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :steps,
                  reject_if: proc { |attributes| attributes['step'].blank?},
                   allow_destroy: true
-
+  # Search recipe
   def self.search(search)
       joins(:ingredients).where({ingredients: { name: "#{search}" }})
   end
@@ -39,4 +39,3 @@ class Recipe < ApplicationRecord
     end
   end
 end
-  
