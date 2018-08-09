@@ -1,0 +1,12 @@
+<center><h2> Following are the the MOST POPULAR RECIPES:</h2></center>
+<div class="row">
+  <div class="col=md-8 col-md-offset-1">
+ <ul>
+    <% @recipes.each do |recipe|%>
+      <p>
+      <h4>  <li>  <%= link_to recipe[1] , recipe_path(recipe[0]) %>   <%= recipe[2] %></li> <h4>
+      </p>
+    <% end %>
+  </ul>
+  </div>
+</div>

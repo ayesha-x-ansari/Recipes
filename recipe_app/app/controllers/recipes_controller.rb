@@ -45,6 +45,10 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
     @current_user = current_user
   end
 
+  def most_commented_recipe
+    @recipes = Recipe.most_commented_recipe
+  end
+
   def destroy
   #  raise params.inspect
     @recipe = Recipe.find(params[:id])
@@ -65,4 +69,3 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
   end
 
 end
-  

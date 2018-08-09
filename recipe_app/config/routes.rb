@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'comments/comment_statistics/:recipe_id' => 'comments#comment_statistics'
 
+  get 'recipes/most_commented_recipe' => 'recipes#most_commented_recipe'
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :recipes  do

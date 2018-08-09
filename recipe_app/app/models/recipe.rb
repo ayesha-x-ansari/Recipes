@@ -32,6 +32,22 @@ class Recipe < ApplicationRecord
   # Find recipe by user
   scope :recipes_by_current_user, -> (user_id){ where(user_id: user_id) }
 
+  def self.most_commented_recipe
+    c  =  Recipe.joins(:comments).order('count(recipe_id) DESC').group(:id).count
+    count = 0
+    most_comment_recipe  =  c.map do |k, v|
+      array = []
+      if  v >= count
+        count =  v
+        recipe  = Recipe.find(k)
+        array[0] = "#{recipe.id}"
+        array.push("#{recipe.title}")
+        array.push(  " ***  Number of comments: #{v}  ***")
+      end
+    end
+    most_comment_recipe.compact
+  end
+
   def ingredients_attributes=(ingredient_attributes)
     ingredient_attributes.values.each do |ingredient_attribute|
       ingredient = Ingredient.find_or_create_by(ingredient_attribute)

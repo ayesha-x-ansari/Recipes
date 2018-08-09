@@ -23,6 +23,7 @@
                 <li>   <%= link_to "List of Ingredients", ingredients_path %></li>
                 <li>   <%= link_to "+Add a Recipe", new_recipe_path %></li>
                 <li>   <%= link_to "Your Comments", user_path(current_user.id) %></li>
+                <li>   <%= link_to "Most Commented", recipes_most_commented_recipe_path %></li>
 
             <%end%>
         </ul>
