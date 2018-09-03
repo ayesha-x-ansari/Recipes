@@ -12,16 +12,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-
-    if @comment.valid?
-    #  @recipe.comments << @comment
-      @recipe.save
-      @comment.save
-      redirect_to @recipe, alert: "Comment successfully added."
+  #  @comment.recipe = @recipe
+    if @comment.save
+      render json: @comment, status: 201
     else
-      render :new
+      flash[:message] = @comment.errors.full_messages
+       render json: {errors: @comment.errors.full_messages}, status: 400
     end
-  end
+   end
 
   def edit
     @comment = Comment.find(params[:id])

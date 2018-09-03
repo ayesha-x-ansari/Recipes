@@ -43,6 +43,14 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
 
   def show
     @current_user = current_user
+    @recipe = Recipe.find(params[:id])
+
+    @comment = Comment.new
+
+      respond_to do |format|
+      format.html { render :show }
+      format.json { render json:  @recipe }
+    end
   end
 
   def most_commented_recipe
