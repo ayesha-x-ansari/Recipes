@@ -105,8 +105,58 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
 
       <div class="col=md-7 col-md-offset-2">
-        <p><%= f.submit 'Submit Comment',id="new_comment", :class => 'btn btn-primary' %></p>
+        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary' %></p>
       </div>
     <%end%>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+
+  // on submit of form class="new_comment"
+  $('form').on("submit", function(event) {
+    debugger
+
+    $.ajax({
+      type: "POST",
+      url: this.action, // this refers to whatever triggered the action === [object HTMLFormElement]
+      data: $(this).serialize(), // takes our form data and serializes it
+      success: function(response) {
+        // on success, update the DOM with response in the form of data
+        let comment = new Comment(response);
+        comment.renderComments();
+        $(".commentBox").val("");
+      }
+    });
+    event.preventDefault();
+  })
+});
+
+// a new comment's response is passed as data and attributes are set to 'this'.
+function Comment(data) {
+  this.id = data.id;
+  this.content = data.content;
+  this.user = data.user;
+};
+
+// this method appends html to the div id="submitted-comments"
+Comment.prototype.renderComments = function() {
+  let html = "" ;
+  html +=
+  `<br>
+    <div class=\'card' id=\'comment-${this.id}'>
+    <div class=\'card-body'>
+      <h6 class=\'card-subtitle mb-2 text-muted'>Posted by:
+        <a href='/users/${this.user.id}'>${this.user.name}</a>
+      </h6>
+      <p class=\'card-text'>${this.content}</p>
+    </div>
+  </div>`;
+
+  $("#submitted-comments").append(html);
+  event.preventDefault();
+
+};
+
+</script>

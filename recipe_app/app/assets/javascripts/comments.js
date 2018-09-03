@@ -3,7 +3,8 @@
 
 $(function(){
   // on submit of form class="new_comment"
-  $("#new_comment").on("submit", function(event) {
+  $("form").on("submit", function(event) {
+    debugger
 
     $.ajax({
       type: "POST",
