@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :recipes  do
-    resources :comments, only: [:index, :new, :create, :edit, :update, show, :destroy, :comment_statistics]
+    resources :comments, only: [:index, :new, :create, :edit, :update, :show, :destroy, :comment_statistics]
   end
 
   resources :users

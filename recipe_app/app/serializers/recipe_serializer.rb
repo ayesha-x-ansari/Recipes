@@ -1,5 +1,5 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :id, :title, :decription
+  attributes :id, :title, :description
   belongs_to :user
   has_many :comments
   has_many :users, through: :comments
