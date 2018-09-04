@@ -45,67 +45,48 @@
 <pre>
 </pre>
 
-  <div id="submitted-comments">
 
-
+<div id="submitted-comments">
 
   <div class="col=md-8 col-md-offset-1">
       <% @comments = Comment.all %>
     <% @comments.each do |comment|  %>
 
-
-    <div class="card" id="comment-<%= comment.id %>">
-        <div class="card-body">
-          <% if comment.user != nil %>
-            <h6 class="card-subtitle mb-2 text-muted">Posted by:  <%= link_to comment.user.name, comment.user %></h6>
-          <% else %>
-            <h6 class="text-muted">By: anonymous</h6>
-          <% end %>
-
-          <p class="card-text"><%= comment.content %></p>
-        </div>
-      </div>
-
-
-
-
-      <%if comment.recipe_id  == @recipe.id  %>
+          <%if comment.recipe_id  == @recipe.id  %>
           Comment By:
           <%= comment.user.name %>  - <%=  comment.content%> <br>
        <%if comment.user_id == @current_user.id%>
            <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
            <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
            <br>
-
           <%end%>
      <%end%>
    <%end%>
  </div>
-
-<br>
 </div>
 
-<%= render partial: 'layouts/errors', locals:{obj: @comment}%>
+
 <% title @recipe.title %>
 <div class="row"  >
   <div class="col=md-6 col-md-offset-3">
     <br>
     <br>
     <h4> Add comment <%= current_user.name %>  </h4>
-
+    <%= render partial: 'layouts/errors', locals:{obj: @comment}%>
     <%= form_for ( [@recipe, @comment])   do |f| %>
       <div>
         <%= f.label :content %><br>
         <%= f.text_area :content, class: 'commentBox', rows: 6, cols:50%><br>
         <%= f.label :ratings %><br>
-        <%= f.select(:ratings, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']],{ :prompt => "Please select"}) %>
+        <%= f.select(:ratings, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']],{ :prompt => "Please select"}, class: "ratingSelection") %>
       </div>
 
       <%= f.hidden_field :recipe_id, value: @recipe.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
 
       <div class="col=md-7 col-md-offset-2">
-        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary' %></p>
+        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary', data: { disable_with: false } %></p>
+
       </div>
     <%end%>
   </div>
@@ -116,14 +97,17 @@ $(function () {
 
   // on submit of form class="new_comment"
   $('form').on("submit", function(event) {
-    debugger
 
     $.ajax({
       type: "POST",
       url: this.action, // this refers to whatever triggered the action === [object HTMLFormElement]
       data: $(this).serialize(), // takes our form data and serializes it
       success: function(response) {
+        event.preventDefault();
+
+
         // on success, update the DOM with response in the form of data
+        //$form.find("input[type=submit]").removeAttr('disabled');
         let comment = new Comment(response);
         comment.renderComments();
         $(".commentBox").val("");
@@ -131,12 +115,15 @@ $(function () {
     });
     event.preventDefault();
   })
-});
+}).error(function(notNeeded){
+alert("we broke!!!!")
+ });
 
 // a new comment's response is passed as data and attributes are set to 'this'.
 function Comment(data) {
   this.id = data.id;
   this.content = data.content;
+  this.recipe_id  = data.recipe_id;
   this.user = data.user;
 };
 
@@ -144,18 +131,24 @@ function Comment(data) {
 Comment.prototype.renderComments = function() {
   let html = "" ;
   html +=
-  `<br>
-    <div class=\'card' id=\'comment-${this.id}'>
-    <div class=\'card-body'>
-      <h6 class=\'card-subtitle mb-2 text-muted'>Posted by:
-        <a href='/users/${this.user.id}'>${this.user.name}</a>
-      </h6>
-      <p class=\'card-text'>${this.content}</p>
-    </div>
-  </div>`;
+
+  //<h1 class=\'card-subtitle mb-2 text-muted'>  <a href='/recipes/${this.recipe_id}/comments/${this.id/edit}'>  Edit comment </a> </h1>
+//  <h1><a href='/users/${this.user.id}'>${this.user.name} </a> </h1>
+` <div class=\'col=md-8 col-md-offset-1'>
+
+    <br>
+    Comment By: ${this.user.name} - ${this.content}
+    <pre>
+    <h6 class=\'card-subtitle mb-2 text-muted'>
+
+        <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'> Edit Comment</a>    <a href='/recipes/${this.recipe_id}/comments/${this.id}, :method =>:delete'> Delete Comment</a>
+  </h6>
+  </pre>
+ </div>`;
 
   $("#submitted-comments").append(html);
-  event.preventDefault();
+  $(".commentBox").val("");
+  $(".ratingSelection").val("");
 
 };
 
