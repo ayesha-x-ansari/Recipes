@@ -53,12 +53,12 @@
     <% @comments.each do |comment|  %>
 
           <%if comment.recipe_id  == @recipe.id  %>
-          Comment By:
-          <%= comment.user.name %>  - <%=  comment.content%> <br>
+        <p>  Comment By:  <%= comment.user.name %>  - <%=  comment.content%>  <br>
        <%if comment.user_id == @current_user.id%>
            <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
            <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
-           <br>
+         </p>
+
           <%end%>
      <%end%>
    <%end%>
@@ -133,18 +133,15 @@ Comment.prototype.renderComments = function() {
   html +=
 
   //<h1 class=\'card-subtitle mb-2 text-muted'>  <a href='/recipes/${this.recipe_id}/comments/${this.id/edit}'>  Edit comment </a> </h1>
+  //<h6 class=\'card-subtitle mb-2 text-muted'>
 //  <h1><a href='/users/${this.user.id}'>${this.user.name} </a> </h1>
-` <div class=\'col=md-8 col-md-offset-1'>
+  ` <div class=\'col=md-8 col-md-offset-1'>
 
+    <p>Comment By: ${this.user.name} - ${this.content}
     <br>
-    Comment By: ${this.user.name} - ${this.content}
-    <pre>
-    <h6 class=\'card-subtitle mb-2 text-muted'>
-
-        <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'> Edit Comment</a>    <a href='/recipes/${this.recipe_id}/comments/${this.id}, :method =>:delete'> Delete Comment</a>
-  </h6>
-  </pre>
- </div>`;
+    <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>   <a data-confirm="Are you sure?" class="btn btn-link" rel="nofollow" data-method="delete" href="/recipes/${this.recipe_id}/comments/${this.id}">Delete Comment</a>
+    </p>
+    </div>`;
 
   $("#submitted-comments").append(html);
   $(".commentBox").val("");
