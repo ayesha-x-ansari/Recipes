@@ -6,7 +6,28 @@
     <ul>
       <%@recipes.each do |recipe|%>
         <li> <%= link_to recipe.title, recipe_path(recipe) %>  - <%= last_updated recipe %> </li>
+        <div id="description-<%= recipe.id %>" > <%= truncate(recipe.description) %></div>
+        <a href='#' data-id="<%= recipe.id %>" class='js-more'>see description</a>
       <%end%>
     </ul>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  // in the recipe div, when you click on .js-more ("see description" link)
+  $(".js-more").on('click',  function(event) {
+    // this.dataset.id; grabs data-id of 'see descriptions' link, which is === recipe.id
+
+    var id = $(this).data("id");
+
+    $.get("/recipes/" + id + ".json", function(data) {
+
+      // replace div of id="description-#", "see descriptions" link with recipe's description
+      $("#description-" + id).text(data.description);
+
+    })
+    event.preventDefault();
+  })
+  })
+</script>

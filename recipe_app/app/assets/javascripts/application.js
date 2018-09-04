@@ -16,5 +16,6 @@
 //= require bootstrap-sprockets
 //= require cocoon
 //= require comments
+//= require recipes
 //= require activestorage
 //= require_tree .

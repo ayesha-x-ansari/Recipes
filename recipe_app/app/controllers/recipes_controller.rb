@@ -10,6 +10,12 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
         @recipes  = Recipe.recipes_by_current_user(params[:user_id])
 
       end
+
+      respond_to do |format|
+      format.html { render :index }
+      format.json { render json:  @recipes }
+    end
+
   end
 
   def new
