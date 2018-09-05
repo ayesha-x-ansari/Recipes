@@ -1,32 +1,47 @@
+
 <% title "list of recipe" %>
 <div class="row">
   <div class="col=md-8 col-md-offset-1">
     <h3> Wellcome <%=current_user.name %> </h3>
     <h4> List of your recipes</h4>
+    <div class="container">
     <ul>
       <%@recipes.each do |recipe|%>
         <li> <%= link_to recipe.title, recipe_path(recipe) %>  - <%= last_updated recipe %> </li>
         <div id="description-<%= recipe.id %>" > <%= truncate(recipe.description) %></div>
-        <a href='#' data-id="<%= recipe.id %>" class='js-more'>see description</a>
+        <a href='#' data-id="<%= recipe.id %>" class='js-more'>Read More</a>
+                <br>
+        <br>
+
       <%end%>
     </ul>
+  </div>
   </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
+  $(this).parent().find('.js-less').hide();
+
   // in the recipe div, when you click on .js-more ("see description" link)
   $(".js-more").on('click',  function(event) {
     // this.dataset.id; grabs data-id of 'see descriptions' link, which is === recipe.id
 
     var id = $(this).data("id");
 
-    $.get("/recipes/" + id + ".json", function(data) {
+    var text = $(this).text();
 
-      // replace div of id="description-#", "see descriptions" link with recipe's description
-      $("#description-" + id).text(data.description);
-
-    })
+    if(text === "Read More") {
+      $(this).text('Read Less');
+      $.get("/recipes/" + id + ".json", function(data) {
+        // replace div of id="description-#", "see descriptions" link with recipe's description
+        $("#description-" + id).text(data.description); })
+    } else {
+      $(this).text('Read More');
+      $.get("/recipes/" + id + ".json", function(data) {
+        // replace div of id="description-#", "see descriptions" link with recipe's description
+        $("#description-" + id).text(data.description.substring(1,30) + " ...")  })
+      }
     event.preventDefault();
   })
   })
