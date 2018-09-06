@@ -7,8 +7,10 @@ $(function(){
     let nextId = parseInt($(".js-previous-ingredient").attr("data-id"))
            nextId = nextId + 1
            alert(nextId)
+
     // get previous ingredient
     $.get("/ingredients/"  + nextId +   "/data", function(data) {
+
       // pass data to loadIngredient
       //loadIngredient(data)
       $(".ingredientName").text(data["name"]);
@@ -23,11 +25,11 @@ $(function(){
   $(".js-previous-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
     let previousId = parseInt($(".js-next-ingredient").attr("data-id"))
-     previousId = previousId + 1
+     previousId = previousId - 1
     // get next ingredient
     $.get("/ingredients/"  +  previousId  +  "/data", function(data) {
       // pass data to loadingredient
-      //loadIngredient(data)
+      loadIngredient(data)
       $(".ingredientName").text(data["name"]);
       $(".js-next-ingredient").attr("data-id", data["id"]);
       $(".js-previous-ingredient").attr("data-id",data["id"]);
@@ -37,7 +39,9 @@ $(function(){
   })
 })
 
-function loadingredient(data) {
+function loadIngredient(data) {
+  alert("abc")
+  alert ("fffffff")
   // change the URL to the new route
   history.pushState({}, "", "/ingredients/" + data.id)
 
@@ -45,6 +49,8 @@ function loadingredient(data) {
 
   // replace header with following ingredient name
   $(".ingredientName").text(data["name"]);
+  $(".js-next-ingredient").attr("data-id", data["id"]);
+  $(".js-previous-ingredient").attr("data-id",data["id"]);
 
   // div where formulas go
   let ingredientRecipePage = $("#ingredientRecipePage")
