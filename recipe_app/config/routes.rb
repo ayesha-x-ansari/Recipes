@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :new, :create, :edit, :update, :show, :destroy, :comment_statistics]
   end
 
+  get '/ingredients/:id/data', to: 'ingredients#data'
   resources :users
   resources :comments
   resources :recipes

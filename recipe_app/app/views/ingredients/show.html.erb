@@ -1,21 +1,18 @@
-<a href="#" class="js-previous-ingredient btn btn-secondary" style="float: left;" data-id="<%=@ingredient.id%>"> < </a>
-<a href="#" class="js-next-ingredient btn btn-secondary" style="float: right;" data-id="<%=@ingredient.id%>"> > </a>
+<a href="#" class="js-previous-ingredient btn btn-secondary" style="float: left;" data-id="<%=@ingredient.id%>"> << Previous Ingredient </a>
+<a href="#" class="js-next-ingredient btn btn-secondary" style="float: right;" data-id="<%=@ingredient.id%>">  Next Ingredient << </a>
 
 <center><h2 class="ingredientName"><%= @ingredient.name  + "'s"%> is present in following recipes:</h2></center>
 <div class="row"  id="ingredientRecipePage">
   <div class="col=md-8 col-md-offset-1">
- <ul>
-    <% @ingredient.recipes.each do |recipe|%>
-    <div class="card border-light" style="max-width: 15rem; min-width: 15rem;">
-
-      <div class="card-body">
-
-  <h5 class='recipeTitle'>   <li>  <%= link_to recipe.title , recipe_path(recipe.id) %></li> </h5>
-        <h6> class="recipeDescription"> recipe.description </h6>
-      </div>
-    </div>
-    
-    <% end %>
-  </ul>
+    <ul>
+      <% @ingredient.recipes.each do |recipe|%>
+        <div class="card border-light" style="max-width: 15rem; min-width: 15rem;">
+          <div class="card-body">
+            <h5 class='recipeTitle'>   <li>  <%= link_to recipe.title , recipe_path(recipe.id) %></li> </h5>
+            <h6 class="recipeDescription"> <%= recipe.description %></h6>
+          </div>
+        </div>
+      <% end %>
+    </ul>
   </div>
 </div>
