@@ -11,6 +11,7 @@ $(function(){
     // get previous ingredient
     $.get("/ingredients/"  + nextId +   "/data", function(data) {
 
+
       // pass data to loadIngredient
       //loadIngredient(data)
       $(".ingredientName").text(data["name"]);
@@ -59,18 +60,16 @@ function loadIngredient(data) {
   ingredientRecipePage.empty()
 
   // array of all Recipes in the ingredient
-  let recipes = (data["recipe_list"])
+  let recipes = (data["recipes"])
+  alert(recipes)
 
   // iterate over each Ingredientin the Recipe_list JSON object, and then insert back into ingredientRecipePage div.
   $.each (recipes, function(index, recipe) {
     ingredienRecipePage.append(
-      `<div class='ingredientRecipe col-lg-3'>
-        <div class='card border-light' style='max-width: 15rem; min-width: 15rem;'>
-          <div class='card-body'>
-          <h5 class='recipeTitle'><a href='/Recipes/${Recipe.id}'>${Recipe.title}</a>
-          <h5 class='recipeDecription'> recipe.decription </h5>
-          </div>
-        </div><br>
+      `<div class='card-body'>
+       alert("dddd")
+          <h5 class='recipeTitle'><a href='/recipes/${recipe.id}'>${recipe.title}</a> <h5>
+          <h6 class='recipeDescription'> recipe.decription </h6>
       </div>`
     )
   })
