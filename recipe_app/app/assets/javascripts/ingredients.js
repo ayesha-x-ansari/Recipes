@@ -66,18 +66,21 @@ function loadIngredient(data) {
   // iterate over each Ingredientin the Recipe_list JSON object, and then insert back into ingredientRecipePage div.
   $.each (recipes, function(index, recipe) {
     ingredientRecipePage.append(
-     `<div class="row"  id="ingredientRecipePage">
-        <div class="col=md-8 col-md-offset-1">
-          <div class='card-body'>
-          alert("dddd")
-            <ul>
-              <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
-              <h6 class='recipeDescription'> ${recipe.description }</h6>
-            </ul>
-          </div>
-        </div>
-      </div>`
+      `<div class="row"  id="ingredientRecipePage">
+
+      <div class="col=md-8 col-md-offset-1">
+
+      <div class='card-body'>
+       alert("dddd")
+       <ul>
+          <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
+          <h6 class='recipeDescription'> ${recipe.description }</h6>
+        </ul>
+      </div>
+      </div>
+      </div>
+
+    `
     )
   })
 }
-  

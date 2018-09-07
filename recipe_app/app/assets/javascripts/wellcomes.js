@@ -1,5 +1,4 @@
 $(function() {
-
   // in the recipe div, when you click on .js-more ("see description" link)
   $(".js-more").on('click',  function(event) {
     // this.dataset.id; grabs data-id of 'see descriptions' link, which is === recipe.id
