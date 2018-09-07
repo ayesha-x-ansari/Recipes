@@ -17,5 +17,6 @@
 //= require cocoon
 //= require comments
 //= require recipes
+//= require wellcomes
 //= require activestorage
 //= require_tree .
