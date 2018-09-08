@@ -1,46 +1,91 @@
+// The below code is for ingredients Show Page, /ingredients/1
+// show pages have next and previous buttons that append with Recipes for each ingredient.
 
-$(function () {
-  // on submit of form class="new_comment"
-  $('form').on("submit", function(event) {
-    $.ajax({
-      type: "POST",
-      url: this.action, // this refers to whatever triggered the action === [object HTMLFormElement]
-      data: $(this).serialize(), // takes our form data and serializes it
-      success: function(response) {
-        event.preventDefault();
-        // on success, update the DOM with response in the form of data
-        //$form.find("input[type=submit]").removeAttr('disabled');
-        let comment = new Comment(response);
-        comment.renderComments();
-        $(".commentBox").val("");
-      }
-    });
+$(function(){
+  $(".js-next-recipe").on("click", function (event) {
+    // get the id from the data-id attribute (current id) assign it to id
+    let nextId = parseInt($(".js-next-recipe").attr("data-id"))
+           nextId = nextId + 1
+           alert(nextId)
+
+    // get previous ingredient
+    $.get("/recipes/"  + nextId +   "/data", function(data) {
+
+      // pass data to loadIngredient
+      //loadRecipe(data)
+      alert("abc")
+      alert(text(data["description"])
+      $(".recipeTitle").text(data["title"]);
+      $(".recipeDescLabel")
+      $(".recipeDescription").text(data["description"]);
+      $(".recipeIngredients")
+      $(".js-next-recipe").attr("data-id", data["id"]);
+      $(".js-previous-recipe").attr("data-id",data["id"]);
+    })
     event.preventDefault();
   })
-}).error(function(notNeeded){
-alert("we broke!!!!")
- });
-// a new comment's response is passed as data and attributes are set to 'this'.
-function Comment(data) {
-  this.id = data.id;
-  this.content = data.content;
-  this.recipe_id  = data.recipe_id;
-  this.user = data.user;
-};
-// this method appends html to the div id="submitted-comments"
-Comment.prototype.renderComments = function() {
-  let html = "" ;
-  html +=
-  //<h1 class=\'card-subtitle mb-2 text-muted'>  <a href='/recipes/${this.recipe_id}/comments/${this.id/edit}'>  Edit comment </a> </h1>
-  //<h6 class=\'card-subtitle mb-2 text-muted'>
-//  <h1><a href='/users/${this.user.id}'>${this.user.name} </a> </h1>
-  ` <div class=\'col=md-8 col-md-offset-1'>
-    <p>Comment By: ${this.user.name} - ${this.content}
-    <br>
-    <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>   <a data-confirm="Are you sure?" class="btn btn-link" rel="nofollow" data-method="delete" href="/recipes/${this.recipe_id}/comments/${this.id}">Delete Comment</a>
-    </p>
-    </div>`;
-  $("#submitted-comments").append(html);
-  $(".commentBox").val("");
-  $(".ratingSelection").val("");
-};
+})
+
+$(function(){
+  $(".js-previous-recipe").on("click", function (event) {
+    // get the id from the data-id attribute (current id) assign it to id
+    let previousId = parseInt($(".js-previous-recipe").attr("data-id"))
+     previousId = previousId - 1
+    // get next ingredient
+    alert("22222222")
+    $.get("/recipes/"  +  previousId  +  "/data", function(data) {
+      // pass data to loadingredient
+      loadRecipe(data)
+      $(".ingredientName").text(data["name"]);
+      $(".js-next-recipe").attr("data-id", data["id"]);
+      $(".js-previous-recipe").attr("data-id",data["id"]);
+
+    })
+    event.preventDefault();
+  })
+})
+
+function loadRecipe(data) {
+  alert("abc")
+  alert ("fffffff")
+  // change the URL to the new route
+  history.pushState({}, "", "/recipes/" + data.id)
+
+  // re-set the id to current on the buttons
+
+  // replace header with following ingredient name
+  $(".ingredientName").text(data["name"]);
+  $(".js-next-ingredient").attr("data-id", data["id"]);
+  $(".js-previous-ingredient").attr("data-id",data["id"]);
+
+  // div where formulas go
+  let ingredientRecipePage = $("#ingredientRecipePage")
+
+  // empty the div
+  ingredientRecipePage.empty()
+
+  // array of all Recipes in the ingredient
+  let recipes = (data["recipes"])
+  alert(recipes)
+
+  // iterate over each Ingredientin the Recipe_list JSON object, and then insert back into ingredientRecipePage div.
+  $.each (recipes, function(index, recipe) {
+    ingredientRecipePage.append(
+      `<div class="row"  id="ingredientRecipePage">
+
+      <div class="col=md-8 col-md-offset-1">
+
+      <div class='card-body'>
+       alert("dddd")
+       <ul>
+          <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
+          <h6 class='recipeDescription'> ${recipe.description }</h6>
+        </ul>
+      </div>
+      </div>
+      </div>
+
+    `
+    )
+  })
+}

@@ -4,7 +4,7 @@
 $(function(){
   $(".js-next-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
-    let nextId = parseInt($(".js-previous-ingredient").attr("data-id"))
+    let nextId = parseInt($(".js-next-ingredient").attr("data-id"))
            nextId = nextId + 1
            alert(nextId)
 
@@ -24,7 +24,7 @@ $(function(){
 $(function(){
   $(".js-previous-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
-    let previousId = parseInt($(".js-next-ingredient").attr("data-id"))
+    let previousId = parseInt($(".js-previous-ingredient").attr("data-id"))
      previousId = previousId - 1
     // get next ingredient
     alert("22222222")
@@ -80,4 +80,3 @@ function loadIngredient(data) {
     )
   })
 }
-  
