@@ -1,47 +1,45 @@
 <% title @recipe.title %>
-<div class="container" style="width:80%;">
+<div class="container" style="width:75%;">
 
-      <h4> Hi <%=current_user.name%> you are viewing " <%= @recipe.title  %> " recipe, which was <%= last_updated @recipe %> <br> </h4>
-      Description:
-       <%= @recipe.description %>
-       <br>
-       <br>
+  <h4> Hi <%=current_user.name%> you are viewing " <em > <%= @recipe.title  %> </em> " recipe, which was <%= last_updated @recipe %> <br> </h4>
+  <strong> DESCRIPTION: </strong><br>
+  <%= @recipe.description %> <br>
+  <strong> INGREDIENTS: </strong><br>
+  <ul>
+    <% @recipe.ingredients.each do |ingredient| %>
+      <li> <%= ingredient.name %> </li>
+    <%end%>
+    </ul>
+
+  <strong>STEPS: </strong>
+    <ol>
+      <% @recipe.steps.each do |s| %>
+        <li> <%= s.step %> </li>
+      <%end%>
+    </ol>
+
+  <br>
        <h4> To view comment rating of this recipe click on the link below <h4>
          <a href="/comments/comment_statistics/<%=@recipe.id%>"> Comments by Rating</a> <br><br>
       <%if @recipe.user_id == @current_user.id%>
         <%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-primary"  %>
         <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-primary"  %>
-        <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-primary"  %>
-
-      <%else%>
-        <%= link_to  "Comment", new_recipe_comment_path(@recipe.id), class: "btn btn-primary"  %>
       <%end%>
       <%= link_to  "Top 5 Comments", recipe_comments_path(@recipe.id), class: "btn btn-primary"  %>
-
-
-    </div>
-
-
-
-    Ingredients:
-    <ul>
-      <% @recipe.ingredients.each do |ingredient| %>
-      <li> <%= ingredient.name %> </li>
-      <%end%>
-    </ul>
-  </div>
-
-     Steps:
-    <ol>
-      <% @recipe.steps.each do |s| %>
-      <li> <%= s.step %> </li>
-      <%end%>
-    </ol>
-
+<br>
+<br>
+      <% @comments = Comment.all %>
+        <% @comments.each do |comment|  %>
+          <%if comment.recipe_id  == @recipe.id  %>
+            <p>  Comment By:  <%= comment.user.name %>  - <%=  comment.content%>  <br>
+              <%if comment.user_id == @current_user.id%>
+                <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
+                <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
+            </p>
+              <%end%>
+          <%end%>
+        <%end%>
 </div>
-</div>
-
-
 
 <div id="submitted-comments">
 
@@ -63,17 +61,14 @@
 </div>
 
 
-<% title @recipe.title %>
 <div class="row"  >
-  <div class="col=md-6 col-md-offset-3">
-    <br>
-    <br>
-    <h4> Add comment <%= current_user.name %>  </h4>
+  <div class="col=md-8 col-md-offset-1">
+    <h4> Add comment <em><%= current_user.name %></em>  </h4>
     <%= render partial: 'layouts/errors', locals:{obj: @comment}%>
     <%= form_for ( [@recipe, @comment])   do |f| %>
       <div>
         <%= f.label :content %><br>
-        <%= f.text_area :content, class: 'commentBox', rows: 6, cols:50%><br>
+        <%= f.text_area :content, class: 'commentBox', rows: 3, cols:65%><br>
         <%= f.label :ratings %><br>
         <%= f.select(:ratings, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']],{ :prompt => "Please select"}, class: "ratingSelection") %>
       </div>
@@ -82,68 +77,8 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
 
       <div class="col=md-7 col-md-offset-2">
-        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary', data: { disable_with: false } %></p>
-
+        <%= f.submit 'Submit Comment', :class => 'btn btn-primary', data: { disable_with: false } %>
       </div>
     <%end%>
   </div>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-$(function () {
-
-  // on submit of form class="new_comment"
-  $('form').on("submit", function(event) {
-
-    $.ajax({
-      type: "POST",
-      url: this.action, // this refers to whatever triggered the action === [object HTMLFormElement]
-      data: $(this).serialize(), // takes our form data and serializes it
-      success: function(response) {
-        event.preventDefault();
-
-
-        // on success, update the DOM with response in the form of data
-        //$form.find("input[type=submit]").removeAttr('disabled');
-        let comment = new Comment(response);
-        comment.renderComments();
-        $(".commentBox").val("");
-      }
-    });
-    event.preventDefault();
-  })
-}).error(function(notNeeded){
-alert("we broke!!!!")
- });
-
-// a new comment's response is passed as data and attributes are set to 'this'.
-function Comment(data) {
-  this.id = data.id;
-  this.content = data.content;
-  this.recipe_id  = data.recipe_id;
-  this.user = data.user;
-};
-
-// this method appends html to the div id="submitted-comments"
-Comment.prototype.renderComments = function() {
-  let html = "" ;
-  html +=
-
-  //<h1 class=\'card-subtitle mb-2 text-muted'>  <a href='/recipes/${this.recipe_id}/comments/${this.id/edit}'>  Edit comment </a> </h1>
-  //<h6 class=\'card-subtitle mb-2 text-muted'>
-//  <h1><a href='/users/${this.user.id}'>${this.user.name} </a> </h1>
-  ` <div class=\'col=md-8 col-md-offset-1'>
-
-    <p>Comment By: ${this.user.name} - ${this.content}
-    <br>
-    <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>   <a data-confirm="Are you sure?" class="btn btn-link" rel="nofollow" data-method="delete" href="/recipes/${this.recipe_id}/comments/${this.id}">Delete Comment</a>
-    </p>
-    </div>`;
-
-  $("#submitted-comments").append(html);
-  $(".commentBox").val("");
-  $(".ratingSelection").val("");
-
-};
-
-</script>

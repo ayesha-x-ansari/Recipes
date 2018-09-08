@@ -6,7 +6,7 @@ $(function() {
     var id = $(this).data("id");
 
     var text = $(this).text();
-
+    alert(text)
     if(text === "Read More") {
       $(this).text('Read Less');
       $.get("/recipes/" + id + ".json", function(data) {
