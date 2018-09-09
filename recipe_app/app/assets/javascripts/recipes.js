@@ -1,91 +1,33 @@
-// The below code is for ingredients Show Page, /ingredients/1
-// show pages have next and previous buttons that append with Recipes for each ingredient.
 
-$(function(){
-  $(".js-next-recipe").on("click", function (event) {
-    // get the id from the data-id attribute (current id) assign it to id
-    let nextId = parseInt($(".js-next-recipe").attr("data-id"))
-           nextId = nextId + 1
-           alert(nextId)
+$(function() {
 
-    // get previous ingredient
-    $.get("/recipes/"  + nextId +   "/data", function(data) {
+  // in the recipe div, when you click on .js-more-recipe ("Read More" link)
+  $(".js-more-recipe").on('click',  function(event) {
 
-      // pass data to loadIngredient
-      //loadRecipe(data)
-      alert("abc")
-      alert(text(data["description"])
-      $(".recipeTitle").text(data["title"]);
-      $(".recipeDescLabel")
-      $(".recipeDescription").text(data["description"]);
-      $(".recipeIngredients")
-      $(".js-next-recipe").attr("data-id", data["id"]);
-      $(".js-previous-recipe").attr("data-id",data["id"]);
+    // this.dataset.id; grabs data-id of 'Read More' link, which is === recipe.id
+    var id = $(this).data("id");
+
+    // grab the text of the link to change it to "read less" if it's "read more" and vice versa.
+    var text = $(this).text();
+
+    if(text === "Read More") {
+
+      // change the text of link from "read more" to "read less"
+      $(this).text('Read Less');
+
+      $.get("/recipes/" + id + ".json", function(data) {
+
+        // replace div of id="description-#", "read more" link with recipe's description
+        $("#description-" + id).text(data.description); })
+    } else {
+      // change the text of link from "read less" to "read more"
+      $(this).text('Read More');
+
+      $.get("/recipes/" + id + ".json", function(data) {
+
+        // replace div of id="description-#", "read less" link with recipe's truncated description
+        $("#description-" + id).text(data.description.substring(1,30) + " ...")  })
+      }
+      event.preventDefault();
     })
-    event.preventDefault();
   })
-})
-
-$(function(){
-  $(".js-previous-recipe").on("click", function (event) {
-    // get the id from the data-id attribute (current id) assign it to id
-    let previousId = parseInt($(".js-previous-recipe").attr("data-id"))
-     previousId = previousId - 1
-    // get next ingredient
-    alert("22222222")
-    $.get("/recipes/"  +  previousId  +  "/data", function(data) {
-      // pass data to loadingredient
-      loadRecipe(data)
-      $(".ingredientName").text(data["name"]);
-      $(".js-next-recipe").attr("data-id", data["id"]);
-      $(".js-previous-recipe").attr("data-id",data["id"]);
-
-    })
-    event.preventDefault();
-  })
-})
-
-function loadRecipe(data) {
-  alert("abc")
-  alert ("fffffff")
-  // change the URL to the new route
-  history.pushState({}, "", "/recipes/" + data.id)
-
-  // re-set the id to current on the buttons
-
-  // replace header with following ingredient name
-  $(".ingredientName").text(data["name"]);
-  $(".js-next-ingredient").attr("data-id", data["id"]);
-  $(".js-previous-ingredient").attr("data-id",data["id"]);
-
-  // div where formulas go
-  let ingredientRecipePage = $("#ingredientRecipePage")
-
-  // empty the div
-  ingredientRecipePage.empty()
-
-  // array of all Recipes in the ingredient
-  let recipes = (data["recipes"])
-  alert(recipes)
-
-  // iterate over each Ingredientin the Recipe_list JSON object, and then insert back into ingredientRecipePage div.
-  $.each (recipes, function(index, recipe) {
-    ingredientRecipePage.append(
-      `<div class="row"  id="ingredientRecipePage">
-
-      <div class="col=md-8 col-md-offset-1">
-
-      <div class='card-body'>
-       alert("dddd")
-       <ul>
-          <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
-          <h6 class='recipeDescription'> ${recipe.description }</h6>
-        </ul>
-      </div>
-      </div>
-      </div>
-
-    `
-    )
-  })
-}

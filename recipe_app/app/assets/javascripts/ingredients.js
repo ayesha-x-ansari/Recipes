@@ -5,17 +5,14 @@ $(function(){
   $(".js-next-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
     let nextId = parseInt($(".js-previous-ingredient").attr("data-id"))
-           nextId = nextId + 1
-           alert(nextId)
+    // get next ingredient
+    nextId = nextId + 1
 
-    // get previous ingredient
     $.get("/ingredients/"  + nextId +   "/data", function(data) {
 
       // pass data to loadIngredient
       loadIngredient(data)
-      $(".ingredientName").text(data["name"]);
-      $(".js-next-ingredient").attr("data-id", data["id"]);
-      $(".js-previous-ingredient").attr("data-id",data["id"]);
+
     })
     event.preventDefault();
   })
@@ -25,15 +22,12 @@ $(function(){
   $(".js-previous-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
     let previousId = parseInt($(".js-next-ingredient").attr("data-id"))
-     previousId = previousId - 1
-    // get next ingredient
-    alert("22222222")
+    // get previous ingredient
+    previousId = previousId - 1
+
     $.get("/ingredients/"  +  previousId  +  "/data", function(data) {
       // pass data to loadingredient
       loadIngredient(data)
-      $(".ingredientName").text(data["name"]);
-      $(".js-next-ingredient").attr("data-id", data["id"]);
-      $(".js-previous-ingredient").attr("data-id",data["id"]);
 
     })
     event.preventDefault();
@@ -41,46 +35,38 @@ $(function(){
 })
 
 function loadIngredient(data) {
-  alert("abc")
-  alert ("fffffff")
+
   // change the URL to the new route
   history.pushState({}, "", "/ingredients/" + data.id)
 
-  // re-set the id to current on the buttons
-
   // replace header with following ingredient name
   $(".ingredientName").text(data["name"]);
+
+  // re-set the id to current on the buttons
   $(".js-next-ingredient").attr("data-id", data["id"]);
   $(".js-previous-ingredient").attr("data-id",data["id"]);
 
-  // div where formulas go
+  // div where recipe go
   let ingredientRecipePage = $("#ingredientRecipePage")
 
   // empty the div
   ingredientRecipePage.empty()
 
-  // array of all Recipes in the ingredient
+  // array of all recipes in the ingredient
   let recipes = (data["recipes"])
-  alert(recipes)
 
-  // iterate over each Ingredientin the Recipe_list JSON object, and then insert back into ingredientRecipePage div.
+  // iterate over each Ingredient in the recipe JSON object, and then insert back into ingredientRecipePage div.
   $.each (recipes, function(index, recipe) {
     ingredientRecipePage.append(
       `<div class="row"  id="ingredientRecipePage">
-
-      <div class="col=md-8 col-md-offset-1">
-
-      <div class='card-body'>
-       alert("dddd")
-       <ul>
-          <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
-          <h6 class='recipeDescription'> ${recipe.description }</h6>
-        </ul>
-      </div>
-      </div>
-      </div>
-
-    `
-    )
+        <div class="col=md-8 col-md-offset-1">
+          <div class='card-body'>
+            <ul>
+              <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
+              <h6 class='recipeDescription'> ${recipe.description }</h6>
+            </ul>
+          </div>
+        </div>
+      </div>` )
   })
 }
