@@ -3,72 +3,64 @@
 <a href="#" class="js-next-recipe btn btn-secondary" style="float: right;" data-id="<%=@recipe.id%>"> Next Recipe> </a>
 
 <div class="container" style="width:75%;">
-<div class="row" id="recipeShowPage">
+  <div class="row" id="recipeShowPage">
+    <h4 class="recipeTitle"> Hi <%=current_user.name%> you are viewing " <em > <%= @recipe.title  %> </em> " recipe, which was <%= last_updated @recipe %> <br> </h4>
+    <strong class="recipeDescLabel"> DESCRIPTION: </strong><br>
+    <h5 class="recipeDescription"><%= @recipe.description %> <br> </h5>
+    <div class="recipeIngredients">
+      <strong class="recipeIngredientLabel"> INGREDIENTS: </strong><br>
+      <ul>
+        <% @recipe.ingredients.each do |ingredient| %>
+          <h4 class="ingredientName">    <li> <%= ingredient.name %> </li> </h4>
+        <%end%>
+      </ul>
+    </div>
 
-  <h4 class="recipeTitle"> Hi <%=current_user.name%> you are viewing " <em > <%= @recipe.title  %> </em> " recipe, which was <%= last_updated @recipe %> <br> </h4>
-  <strong class="recipeDescLabel"> DESCRIPTION: </strong><br>
-  <h5 class="recipeDescription"><%= @recipe.description %> <br> </h5>
-  <div class="recipeIngredients">
-  <strong class="recipeIngredientLabel"> INGREDIENTS: </strong><br>
-  <ul>
-    <% @recipe.ingredients.each do |ingredient| %>
-  <h4 class="ingredientName">    <li> <%= ingredient.name %> </li> </h4>
-    <%end%>
-    </ul>
+    <div class=recipeSteps>
+      <strong class="recipeStepLabel">STEPS: </strong>
+      <ol>
+        <% @recipe.steps.each do |s| %>
+          <h4 class="recipeStepName">    <li> <%= s.step %> </li> </h4>
+        <%end%>
+      </ol>
+    </div>
   </div>
-
- <div class=recipeSteps>
-  <strong class="recipeStepLabel">STEPS: </strong>
-    <ol>
-      <% @recipe.steps.each do |s| %>
-    <h4 class="recipeStepName">    <li> <%= s.step %> </li> </h4>
-      <%end%>
-    </ol>
-  </div>
-</div>
-</div>
 
   <br>
-       <h4> To view comment rating of this recipe click on the link below <h4>
-         <a href="/comments/comment_statistics/<%=@recipe.id%>"> Comments by Rating</a> <br><br>
-      <%if @recipe.user_id == @current_user.id%>
-        <%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-primary"  %>
-        <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-primary"  %>
-      <%end%>
-      <%= link_to  "Top 5 Comments", recipe_comments_path(@recipe.id), class: "btn btn-primary"  %>
-<br>
+  <h4> To view comment rating of this recipe click on the link below <h4>
+  <a href="/comments/comment_statistics/<%=@recipe.id%>"> Comments by Rating</a> <br><br>
+  <%if @recipe.user_id == @current_user.id%>
+    <%= link_to  "Edit", edit_recipe_path(@recipe),class: "btn btn-primary"  %>
+    <%= link_to  "Delete", recipe_path(@recipe), :method => :delete, data: {confirm: "Are you sure?" }, class: "btn btn-primary"  %>
+  <%end%>
+  <%= link_to  "Top 5 Comments", recipe_comments_path(@recipe.id), class: "btn btn-primary"  %>
+  <br>
+</div>
 <br>
 <div id="submitted-comments">
-
-  <div class="col=md-8 col-md-offset-1">
-      <% @comments = Comment.all %>
+  <div class="col=md-7 col-md-offset-2">
+    <% @comments = Comment.all %>
     <% @comments.each do |comment|  %>
-
-          <%if comment.recipe_id  == @recipe.id  %>
-        <p>  Comment By:  <%= comment.user.name %>  - <%=  comment.content%>  <br>
-       <%if comment.user_id == @current_user.id%>
-           <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
-           <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
-         </p>
-
+      <%if comment.recipe_id  == @recipe.id  %>
+        <p>Comment By:  <%= comment.user.name %>  - <%=  comment.content%> <br>
+          <%if comment.user_id == @current_user.id%>
+            <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
+            <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
           <%end%>
-     <%end%>
-   <%end%>
- </div>
+        <p>
+      <%end%>
+    <%end%>
+  </div>
 </div>
 
-
-<% title @recipe.title %>
 <div class="row"  >
-  <div class="col=md-6 col-md-offset-3">
-    <br>
-    <br>
+  <div class="col=md-7 col-md-offset-2">
     <h4> Add comment <%= current_user.name %>  </h4>
     <%= render partial: 'layouts/errors', locals:{obj: @comment}%>
     <%= form_for ( [@recipe, @comment])   do |f| %>
       <div>
         <%= f.label :content %><br>
-        <%= f.text_area :content, class: 'commentBox', rows: 6, cols:50%><br>
+        <%= f.text_area :content, class: 'commentBox', rows: 3, cols:60%><br>
         <%= f.label :ratings %><br>
         <%= f.select(:ratings, [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']],{ :prompt => "Please select"}, class: "ratingSelection") %>
       </div>

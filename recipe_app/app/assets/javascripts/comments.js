@@ -8,7 +8,7 @@ $(function () {
       success: function(response) {
         event.preventDefault();
         // on success, update the DOM with response in the form of data
-        //$form.find("input[type=submit]").removeAttr('disabled');
+
         let comment = new Comment(response);
         comment.renderComments();
         $(".commentBox").val("");
@@ -30,15 +30,11 @@ function Comment(data) {
 Comment.prototype.renderComments = function() {
   let html = "" ;
   html +=
-  //<h1 class=\'card-subtitle mb-2 text-muted'>  <a href='/recipes/${this.recipe_id}/comments/${this.id/edit}'>  Edit comment </a> </h1>
-  //<h6 class=\'card-subtitle mb-2 text-muted'>
-//  <h1><a href='/users/${this.user.id}'>${this.user.name} </a> </h1>
-  ` <div class=\'col=md-8 col-md-offset-1'>
-    <p>Comment By: ${this.user.name} - ${this.content}
-    <br>
-    <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>   <a data-confirm="Are you sure?" class="btn btn-link" rel="nofollow" data-method="delete" href="/recipes/${this.recipe_id}/comments/${this.id}">Delete Comment</a>
-    </p>
-    </div>`;
+    ` <div class=\'col=md-7 col-md-offset-2'>
+        <p>Comment By: ${this.user.name} - ${this.content} <br>
+          <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>   <a data-confirm="Are you sure?" class="btn btn-link" rel="nofollow" data-method="delete" href="/recipes/${this.recipe_id}/comments/${this.id}">Delete Comment</a>
+        </p>
+      </div>`;
   $("#submitted-comments").append(html);
   $(".commentBox").val("");
   $(".ratingSelection").val("");
