@@ -5,10 +5,10 @@ $(function() {
   $(".js-more-recipe").on('click',  function(event) {
 
     // this.dataset.id; grabs data-id of 'Read More' link, which is === recipe.id
-    var id = $(this).data("id");
+    let id = $(this).data("id");
 
     // grab the text of the link to change it to "read less" if it's "read more" and vice versa.
-    var text = $(this).text();
+    let text = $(this).text();
 
     if(text === "Read More") {
 
@@ -31,3 +31,34 @@ $(function() {
       event.preventDefault();
     })
   })
+
+//###############################################################################################################################
+//###############################################################################################################################
+//click event for comment delete
+
+$("#submitted-comments").on("click",'.deleteComment',function(event){
+
+  event.preventDefault();
+
+  let id = $(this).data("id");
+
+  let  deleteUrl = "/comments/" + id;
+
+  //saved container div for later fadeout
+  var parentDiv = $(this).parent();
+
+  $.ajax({
+    url: deleteUrl,
+    //older browser support. Should I worry about this or is it okay to use type:'DELETE'?
+    type: "POST", data:{"_method": "DELETE"}
+
+  }).done(function(data){
+
+    //fadeout effect for comment container
+    $(parentDiv).fadeOut("slow");
+
+  }).fail(function(error){
+
+    alert(error.statusText);
+  });
+});

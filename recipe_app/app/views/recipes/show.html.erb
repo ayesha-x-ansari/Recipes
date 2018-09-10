@@ -45,8 +45,10 @@
         <p>Comment By:  <%= comment.user.name %>  - <%=  comment.content%> <br>
           <%if comment.user_id == @current_user.id%>
             <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
-            <%= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },class: "btn btn-link"  %>
-          <%end%>
+            <%#= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },
+            class: "btn btn-link"  %>
+            <a href = "#" class = "btn btn-link deleteComment" data-id="<%=comment.id%>" data-recipe-id="<%=comment.recipe_id%>">Delete Comment</a>
+        <%end%>
         <p>
       <%end%>
     <%end%>
@@ -70,8 +72,38 @@
 
       <div class="col=md-7 col-md-offset-2">
         <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary', data: { disable_with: false } %></p>
-
       </div>
     <%end%>
   </div>
 </div>
+
+
+<script type="text/javascript" charset= "utf-8">
+
+$("#submitted-comments").on("click",'.deleteComment',function(event){
+
+  event.preventDefault();
+
+  let id = $(this).data("id");
+
+  let  deleteUrl = "/comments/" + id;
+
+  //saved container div for later fadeout
+  var parentDiv = $(this).parent();
+
+  $.ajax({
+    url: deleteUrl,
+    //older browser support. Should I worry about this or is it okay to use type:'DELETE'?
+    type: "POST", data:{"_method": "DELETE"}
+
+  }).done(function(data){
+
+    //fadeout effect for comment container
+    $(parentDiv).fadeOut("slow");
+
+  }).fail(function(error){
+
+    alert(error.statusText);
+  });
+});
+</script>

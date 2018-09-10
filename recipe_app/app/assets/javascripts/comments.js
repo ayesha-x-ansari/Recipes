@@ -32,10 +32,44 @@ Comment.prototype.renderComments = function() {
   html +=
     ` <div class=\'col=md-7 col-md-offset-2'>
         <p>Comment By: ${this.user.name} - ${this.content} <br>
-          <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>   <a data-confirm="Are you sure?" class="btn btn-link" rel="nofollow" data-method="delete" href="/recipes/${this.recipe_id}/comments/${this.id}">Delete Comment</a>
+          <a href='/recipes/${this.recipe_id}/comments/${this.id}/edit'>  Edit Comment</a>
+          <a href = "#" class = "btn btn-link deleteComment" data-id="${this.id}" data-recipe-id="${this.recipe_id}">Delete Comment</a>
         </p>
       </div>`;
   $("#submitted-comments").append(html);
   $(".commentBox").val("");
   $(".ratingSelection").val("");
 };
+
+
+
+//###############################################################################################################################
+//###############################################################################################################################
+//click event for comment delete
+
+$("#submitted-comments").on("click",'.deleteComment',function(event){
+
+  event.preventDefault();
+
+  let id = $(this).data("id");
+
+  let  deleteUrl = "/comments/" + id;
+
+  //saved container div for later fadeout
+  var parentDiv = $(this).parent();
+
+  $.ajax({
+    url: deleteUrl,
+    //older browser support. Should I worry about this or is it okay to use type:'DELETE'?
+    type: "POST", data:{"_method": "DELETE"}
+
+  }).done(function(data){
+
+    //fadeout effect for comment container
+    $(parentDiv).fadeOut("slow");
+
+  }).fail(function(error){
+
+    alert(error.statusText);
+  });
+});

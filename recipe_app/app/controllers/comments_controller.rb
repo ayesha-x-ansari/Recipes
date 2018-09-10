@@ -55,12 +55,14 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    @recipe.save
-    redirect_to @recipe, alert: "Comment successfully deleted."
+    render json: @comment
 
-    if @comment.user_id != current_user.id
-      redirect_to user_recipes_path(current_user), alert: "You may not delete this comment."
-    end
+    #@recipe.save
+    #redirect_to @recipe, alert: "Comment successfully deleted."
+
+    #if @comment.user_id != current_user.id
+    #  redirect_to user_recipes_path(current_user), alert: "You may not delete this comment."
+    #end
   end
 
   private
