@@ -20,7 +20,8 @@ Specs:
   When comment form is submitted on recipe/1 show page, the comment's id, content, recipe_id and user of new comment is used to create a JS comment object.
 
 - [X] At least one of the js model objects must have at least one method added by your code to the prototype.
-  The data of a comment is passed into the createCommentsDiv comments prototype function to create a <DIV> and then <DIV> is appended to the DOM. The form input fields are cleared by clearFormFields() comments prototype function
+  The data of a comment is passed into the createCommentsDiv() comment’s prototype function to create a “DIV” and then “DIV” is appended to the DOM.
+  The form input fields are cleared by clearFormFields() comment’s prototype function.
 
 Confirm
 - [X] You have a large number of small Git commits
