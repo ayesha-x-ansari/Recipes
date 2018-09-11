@@ -1,4 +1,4 @@
-##recipe_app
+## recipe_app
 Its a web based application. Where recipe seekers can register and then browse through existing recipes they can also add comments as well as edit their own comments. Users also have capability to create and edit their own recipes
 
 ##Usage
