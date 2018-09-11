@@ -1,7 +1,4 @@
 <% title @recipe.title %>
-<a href="#" class="js-previous-recipe btn btn-secondary" style="float: left;" data-id="<%=@recipe.id%>"> Previous Recipe< </a>
-<a href="#" class="js-next-recipe btn btn-secondary" style="float: right;" data-id="<%=@recipe.id%>"> Next Recipe> </a>
-
 <div class="container" style="width:75%;">
   <div class="row" id="recipeShowPage">
     <h4 class="recipeTitle"> Hi <%=current_user.name%> you are viewing " <em > <%= @recipe.title  %> </em> " recipe, which was <%= last_updated @recipe %> <br> </h4>
@@ -47,7 +44,7 @@
             <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
             <%#= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },
             class: "btn btn-link"  %>
-            <a href = "#" class = "btn btn-link deleteComment" data-id="<%=comment.id%>" data-recipe-id="<%=comment.recipe_id%>">Delete Comment</a>
+            <a href = "#" class = "btn btn-link deleteComment" data-id="<%=comment.id%>" data-recipe-id="<%=comment.recipe_id%>">Deeeeeeeeeeelete Comment</a>
         <%end%>
         <p>
       <%end%>
