@@ -44,7 +44,7 @@
             <%= link_to  "Edit Comment", edit_recipe_comment_path(@recipe.id, comment.id),class: "btn btn-link"  %>
             <%#= link_to  "Delete Comment", recipe_comment_path(@recipe.id, comment.id), :method => :delete, data: {confirm: "Are you sure?" },
             class: "btn btn-link"  %>
-            <a href = "#" class = "btn btn-link deleteComment" data-id="<%=comment.id%>" data-recipe-id="<%=comment.recipe_id%>">Deeeeeeeeeeelete Comment</a>
+            <a href = "#" class = "btn btn-link deleteComment" data-id="<%=comment.id%>" data-recipe-id="<%=comment.recipe_id%>"> Delete Comment</a>
         <%end%>
         <p>
       <%end%>
