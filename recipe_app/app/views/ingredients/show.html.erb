@@ -4,15 +4,13 @@
 <center><h2 class="ingredientName"><%= @ingredient.name  + "'s"%> is present in following recipes:</h2></center>
 <div class="row"  id="ingredientRecipePage">
   <div class="col=md-8 col-md-offset-1">
-    <ul>
       <% @ingredient.recipes.each do |recipe|%>
-
           <div class="card-body">
-            <h5 class='recipeTitle'>   <li>  <%= link_to recipe.title , recipe_path(recipe.id) %></li> </h5>
-            <h6 class="recipeDescription"> <%= recipe.description %></h6>
+            <ul>
+              <h5 class='recipeTitle'>   <li>  <%= link_to recipe.title , recipe_path(recipe.id) %></li> </h5>
+              <h6 class="recipeDescription"> <%= recipe.description %></h6>
+            </ul>
           </div>
-        </div>
       <% end %>
-    </ul>
   </div>
 </div>
