@@ -34,6 +34,7 @@ $(function(){
   })
 })
 
+// this function gets data empty div and then format div, move data and then append formatted div
 function loadIngredient(data) {
 
   // change the URL to the new route
