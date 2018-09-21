@@ -6,6 +6,10 @@ class IngredientsController < ApplicationController
 
   def show
     @ingredient = Ingredient.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json:  @ingredient }
+    end
   end
 
   def data  # get '/categories/:id/next', to: 'categories#next_category'

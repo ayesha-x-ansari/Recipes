@@ -32,3 +32,35 @@ $(function() {
       event.preventDefault();
     })
   })
+
+
+
+  $(function (){
+    $("#sortRecipes").on('click',  function(event) {
+     $.get("/wellcomes" + ".json", function(data){
+        let recipes = (data)
+// sorts recipe by title in decending order.
+        sortRecipesByTitle(recipes)
+        debugger
+      // div where recipe go
+    let recipePage = $(".sortedRecipes")
+
+  // empty the div
+       recipePage.empty()
+
+        // iterate over each Ingredient in the recipe JSON object, and then insert back into ingredientRecipePage div.
+        $.each (recipes, function(index, recipe) {
+          recipePage.append(
+            `<div class="row"  id="ingredientRecipePage">
+              <div class="col=md-8 col-md-offset-1">
+                <div class='card-body'>      
+                    <h5 class='recipeTitle'> <li> <a href='/recipes/${recipe.id}'>${recipe.title}</a>  </li><h5>
+                    <h6 class='recipeDescription'> ${recipe.description }</h6>
+                </div>
+              </div>
+            </div>` )
+        })
+      })
+      event.preventDefault()
+     }) 
+  })

@@ -6,10 +6,12 @@
   <h3>Achieve Daily, Dream Big!</h3>
 </center>
 
+<a href="#"  id="sortRecipes" class="btn btn-primary">  Get Recipes In Sort Order </a> 
+
 <div class="row">
   <div class="col=md-8 col-md-offset-1">
     <h4> List of Recipe </h4>
-    <ul>
+    <ul class="sortedRecipes">
       <%@recipes.each do |recipe|%>
         <h5><li> <%= link_to recipe.title, recipe_path(recipe) %>  - <%= last_updated recipe %> </li></h5>
         <div id="description-<%= recipe.id %>" > <%= truncate(recipe.description) %></div>

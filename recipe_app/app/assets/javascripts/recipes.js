@@ -32,33 +32,3 @@ $(function() {
     })
   })
 
-//###############################################################################################################################
-//###############################################################################################################################
-//click event for comment delete
-
-$("#submitted-comments").on("click",'.deleteComment',function(event){
-
-  event.preventDefault();
-
-  let id = $(this).data("id");
-
-  let  deleteUrl = "/comments/" + id;
-
-  //saved container div for later fadeout
-  var parentDiv = $(this).parent();
-
-  $.ajax({
-    url: deleteUrl,
-    //older browser support. Should I worry about this or is it okay to use type:'DELETE'?
-    type: "POST", data:{"_method": "DELETE"}
-
-  }).done(function(data){
-
-    //fadeout effect for comment container
-    $(parentDiv).fadeOut("slow");
-
-  }).fail(function(error){
-
-    alert(error.statusText);
-  });
-});

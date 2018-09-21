@@ -8,7 +8,7 @@ $(function(){
     // get next ingredient
     nextId = nextId + 1
 
-    $.get("/ingredients/"  + nextId +   "/data", function(data) {
+    $.get("/ingredients/"  + nextId +  ".json", function(data) {
 
       // pass data to loadIngredient
       loadIngredient(data)
@@ -25,7 +25,7 @@ $(function(){
     // get previous ingredient
     previousId = previousId - 1
 
-    $.get("/ingredients/"  +  previousId  +  "/data", function(data) {
+    $.get("/ingredients/"  +  previousId  +  ".json", function(data) {
       // pass data to loadingredient
       loadIngredient(data)
 

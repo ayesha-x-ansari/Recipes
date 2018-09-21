@@ -57,12 +57,11 @@ before_action  :find_recipe, only: [:show, :edit, :update, :destroy]
       format.html { render :show }
       format.json { render json:  @recipe }
     end
+  end  
 
-    def data  # get '/categories/:id/next', to: 'categories#next_category'
-      @recipe = Recipe.find(params[:id])
-      render json: @recipe
-    end
-
+  def data  # get '/categories/:id/next', to: 'categories#next_category'
+    @recipe = Recipe.find(params[:id])
+    render json: @recipe
   end
 
   def most_commented_recipe
