@@ -68,14 +68,10 @@ r.steps.build(step: " Add rice; cook and stir until heated through, 2 to 3 minut
 r.steps.build(step: " Stir in soy sauce and sesame oil. Add onion, red bell pepper, mushrooms, and green onions; cook and stir until tender, 5 to 10 minutes.")
 r.save
 
-
-
-
-########################################################################################################
 r = Recipe.new(:title => "Nutella Brownies", :description => "Sometimes all you need is some Nutella or chocolate. Well, now you can have both in under 20 minutes with these Nutella brownies. ", :user_id =>  2 )
 r.ingredients.build(name: "Egg")
 r.ingredients.build(name: "Nutella")
-r.steps.ingredients(name: "Flour")
+r.ingredients.build(name: "Flour")
 r.steps.build(step: "2 eggs,   2/3 cup Nutella,  2/3 cup flour")
 r.steps.build(step: "Mix the eggs, Nutella and flour in a large bowl.")
 r.steps.build(step: "Spray the pan with cooking spray, then evenly spread the mixture.")
@@ -96,13 +92,12 @@ r.save
 
 r = Recipe.new(:title => "Chocolate Mug Cake", :description => "So the next time you’re craving something sweet and are short on time, you know what to make.", :user_id =>  2 )
 r.ingredients.build(name: "Banana")
-r.steps.build(step: "Strawberry")
-r.steps.build(step: "Cocoa Powder")
+r.ingredients.build(name: "Strawberry")
+r.ingredients.build(name: "Cocoa Powder")
 r.steps.build(step: "1 very ripe banana,  20 strawberries,  2 tablespoon cocoa powder")
 r.steps.build(step: "Grease a coffee mug to make it non-stick. Mix all ingredients in a bowl. Pour in mug.")
 r.steps.build(step: "Microwave on high between 1-2 minutes depending on microwave wattage.")
 r.save
-
 
 
 c = Comment.new(:content => "Lorem ipsum dolor sit amet.",  :ratings => 5,  :recipe_id => 1, :user_id  => 1)
