@@ -29,10 +29,7 @@ $(function() {
         $("#description-" + id).text(data.description.substring(1,30) + " ...")  })
       }
     })
-  //666666666666666666})
 
-// function to get recipe in alphabetical order
-  //6666666666666666$(function (){
     $("#sortRecipes").on('click',  function(event) {
       $.get("/wellcomes" + ".json", function(data){
         let recipes = (data)
