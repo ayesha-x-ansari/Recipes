@@ -3,7 +3,6 @@ class Ingredient < ApplicationRecord
   has_many :recipes, through: :recipe_ingredients
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
-  validates :recipe_id, uniqueness: true
 
   validate :is_name_upcase
 
@@ -22,4 +21,3 @@ class Ingredient < ApplicationRecord
   end
 
 end
-  
