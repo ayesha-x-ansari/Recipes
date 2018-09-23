@@ -1,35 +1,37 @@
+
 $(function () {
 
     //**************************************************************************************************************
-    // on submit of form class="new_comment"
+    // ADD's a comment on the same page without page refresh on submit of form with class="new_comment"
     //**************************************************************************************************************
     $("#new_comment").on("submit", function(event) {
 
       event.preventDefault()
 
-      var values = $(this).serialize();
+      $.ajax({
+         type: "POST",              // this is a POST request
+         url: this.action,          // this refers to whatever triggered the action === [object HTMLFormElement]
+         data: $(this).serialize()
+       }).done(function(data){
 
-      var url =  this.action
-
-      var commenting = $.post(url, values);
-
-      commenting.done(function(data) {
-      // TODO: handle response
-
-      //$.ajax({
-        // type: "POST",
-         // url: this.action, // this refers to whatever triggered the action === [object HTMLFormElement]
-         // data: $(this).serialize(), // takes our form data and serializes it
-         // success: function(data) {
-            //UUUUUUUUUUUUU on success, update the DOM with response in the form of data
-
+          // instantiate a comment ohject
           let comment = new Comment(data);
-          comment.createCommentsDiv();
-          comment.clearFormFields();
-      })
 
+          // invoke prototype function to move data to DIV and then append that div to $("#submitted-comments") selector
+          comment.createCommentsDiv();
+
+          // invoke prototype function to clear the comment form fields
+          comment.clearFormFields();
+
+          //In case of error alert withe error message
+          }).fail(function(error){
+            alert(error.statusText);
+          });
     });
 
+    //**************************************************************************************************************
+    // DELETE a comment: On click of button with deleteComment class
+    //**************************************************************************************************************
     $("#submitted-comments").on("click",'.deleteComment',function(event){
 
       event.preventDefault()
@@ -53,7 +55,7 @@ $(function () {
   })
 
 
-    //*******************************************************************************************************************
+//*******************************************************************************************************************
 // a new comment's response is passed as data and attributes are set to 'this'.
 //*******************************************************************************************************************
 function Comment(data) {
@@ -78,8 +80,6 @@ function Comment(data) {
         </div>`;
     $("#submitted-comments").append(html);
     };
-
-
 
   //*******************************************************************************************************************
   //clears input fields of comment form
