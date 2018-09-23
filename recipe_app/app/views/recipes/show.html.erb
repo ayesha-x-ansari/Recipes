@@ -68,7 +68,7 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
 
       <div class="col=md-7 col-md-offset-2">
-        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary', data: { disable_with: false } %></p>
+        <p><%= f.submit 'Submit Comment', :class => 'btn btn-primary', :id => 'new-comment', data: { disable_with: false } %></p>
       </div>
     <%end%>
   </div>
@@ -77,7 +77,7 @@
 
 <script type="text/javascript" charset= "utf-8">
 $("#submitted-comments").on("click",'.deleteComment',function(event){
- 
+
   let id = $(this).data("id");
   let  deleteUrl = "/comments/" + id;
   //saved container div for later fadeout

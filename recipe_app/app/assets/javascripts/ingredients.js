@@ -14,11 +14,8 @@ $(function(){
       loadIngredient(data)
 
     })
-    event.preventDefault();
   })
-})
 
-$(function(){
   $(".js-previous-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
     let previousId = parseInt($(".js-next-ingredient").attr("data-id"))
@@ -30,8 +27,8 @@ $(function(){
       loadIngredient(data)
 
     })
-    event.preventDefault();
   })
+  event.preventDefault();
 })
 
 // this function gets data empty div and then format div, move data and then append formatted div

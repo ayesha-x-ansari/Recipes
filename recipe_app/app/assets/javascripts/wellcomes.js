@@ -28,12 +28,11 @@ $(function() {
         // replace div of id="description-#", "read less" link with recipe's truncated description
         $("#description-" + id).text(data.description.substring(1,30) + " ...")  })
       }
-      event.preventDefault();
     })
-  })
+  //666666666666666666})
 
 // function to get recipe in alphabetical order
-  $(function (){
+  //6666666666666666$(function (){
     $("#sortRecipes").on('click',  function(event) {
       $.get("/wellcomes" + ".json", function(data){
         let recipes = (data)
@@ -60,6 +59,6 @@ $(function() {
                </div>` )
           })
       })
-      event.preventDefault()
     })
+    event.preventDefault()
   })
