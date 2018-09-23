@@ -17,13 +17,21 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
     </div>
 
+    <div class="field">
+  <h5>Ingredients:</h5>
+  <%= f.collection_select :id, Ingredient.all, :id , :name, {:prompt => true}, {class: "form-control"} %>
+</div><br>
+
+
+
+
     <div>
-      <h4><%= f.label :ingredient %> </h4>
-        <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %>
-        <%= f.fields_for :ingredients do |ingredient|  %>
-          <%= render   'ingredient_fields', f: ingredient %>
-        <% end %>
-    </div>
+    <%= f.collection_check_boxes(:ingredient_ids, Ingredient.all.order("name ASC").select { |ingredient| !ingredient[:name].blank? },
+     :id, :name, :class => "custom-control-input") do |s| %>
+      <%=s.check_box%> <%=s.text %>
+    <% end %>
+  </div>
+
 
     <div class="links">
       <%= link_to_add_association 'Click To Add ingredients', f, :ingredients, class: "btn btn-link" %>
