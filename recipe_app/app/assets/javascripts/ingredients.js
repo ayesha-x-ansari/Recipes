@@ -1,7 +1,17 @@
-// The below code is for ingredients Show Page, /ingredients/1
-// show pages have next and previous buttons that append with Recipes for each ingredient.
-
+//********************************************************************************************************************
+// document ready function
+//********************************************************************************************************************
 $(function(){
+  nextIngredient()
+  previousIngredient() 
+})
+
+//********************************************************************************************************************
+// show page have next and previous buttons that show next ingredient when next ingredient button is clicked
+// and gets all recipes for that ingredient and appends it on the page without page refresh, div is appended by
+// function loadIngredient() function.
+//********************************************************************************************************************
+let nextIngredient = function () { 
   $(".js-next-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
     let nextId = parseInt($(".js-previous-ingredient").attr("data-id"))
@@ -12,10 +22,17 @@ $(function(){
 
       // pass data to loadIngredient
       loadIngredient(data)
-
-    })
+      })
+    event.preventDefault()
   })
+}
 
+//********************************************************************************************************************
+// show page have next and previous buttons that show previous ingredient when previous ingredient button is clicked
+// and gets all recipes for that ingredient and appends it on the page without page refresh, div is appended by
+// function loadIngredient() function.
+//********************************************************************************************************************
+let previousIngredient = function(){ 
   $(".js-previous-ingredient").on("click", function (event) {
     // get the id from the data-id attribute (current id) assign it to id
     let previousId = parseInt($(".js-next-ingredient").attr("data-id"))
@@ -25,13 +42,14 @@ $(function(){
     $.get("/ingredients/"  +  previousId  +  ".json", function(data) {
       // pass data to loadingredient
       loadIngredient(data)
-
     })
+    event.preventDefault();
   })
-  event.preventDefault();
-})
+}
 
-// this function gets data empty div and then format div, move data and then append formatted div
+//********************************************************************************************************************
+//this function gets data empty div and then format div, move data and then append formatted div.
+//********************************************************************************************************************
 function loadIngredient(data) {
 
   // change the URL to the new route
